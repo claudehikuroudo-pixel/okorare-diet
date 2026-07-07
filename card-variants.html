@@ -1,0 +1,195 @@
+<style>
+  .odm{
+    --paper:#F5F4F1; --ink:#1A1613; --ink2:#726A61; --line:#EAE7E2;
+    --accent:#E4022B; --p5red:#E4022B; --p5ink:#0B0B0C; --gold:#F2B01E;
+    --fdisp:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+    color:var(--ink);font-family:var(--fdisp);line-height:1.5;-webkit-font-smoothing:antialiased;
+    background:radial-gradient(90% 60% at 12% -8%,#fbe3e3 0,rgba(251,227,227,0) 42%),var(--paper);
+    padding:40px 20px 72px;min-height:100vh;
+  }
+  .odm *{box-sizing:border-box}
+  .odm .wrap{max-width:1140px;margin:0 auto}
+  .odm .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin-bottom:12px}
+  .odm .eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);border-radius:2px}
+  .odm h1{font-size:clamp(26px,4vw,40px);font-weight:900;letter-spacing:-.02em;margin:0 0 12px}
+  .odm h1 b{color:var(--accent)}
+  .odm .lede{font-size:15px;color:var(--ink2);max-width:60ch;margin:0}
+  .odm .lede b{color:var(--ink);font-weight:700}
+
+  .odm .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:28px;margin-top:38px}
+  .odm .item{display:flex;flex-direction:column;gap:13px}
+  .odm .cap .n{font-size:11px;font-weight:900;letter-spacing:.1em;color:var(--accent)}
+  .odm .cap .t{font-size:15px;font-weight:800;margin-top:2px}
+  .odm .cap .d{font-size:12px;color:var(--ink2);line-height:1.55;margin-top:3px}
+  .odm .cap .d b{color:var(--ink)}
+
+  /* ── card base ── */
+  .odm .card{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:var(--p5ink);color:#f7f5f2;box-shadow:0 20px 40px -18px rgba(20,12,8,.45)}
+  .odm .red{position:absolute;top:-6%;left:-6%;right:-6%;height:68%;background:var(--p5red);clip-path:polygon(0 0,100% 0,100% 76%,0 97%);z-index:0}
+  .odm .dots{position:absolute;inset:0;z-index:0;opacity:.15;background-image:radial-gradient(#000 1.1px,transparent 1.5px);background-size:7px 7px}
+  .odm .star{position:absolute;top:10px;right:12px;width:28px;height:28px;z-index:3;color:#fff;transform:rotate(12deg)}
+  .odm .star.g{color:var(--gold)}
+  .odm .pad{position:relative;z-index:2;padding:14px 15px 0;display:flex;flex-direction:column;height:100%}
+  .odm .kick{font-size:9.5px;font-weight:900;letter-spacing:.2em;color:var(--p5ink)}
+  .odm .kick.g{color:var(--gold)}
+  .odm .verdict{display:flex;align-items:baseline;gap:8px;transform:skewX(-6deg);margin-top:1px}
+  .odm .verdict em{font-style:italic;font-weight:900;font-size:52px;line-height:.85;letter-spacing:2px;color:#f7f5f2;-webkit-text-stroke:2.4px var(--p5ink);paint-order:stroke fill}
+  .odm .verdict em.g{color:#f9f2da;-webkit-text-stroke:2.4px #2a2413}
+  .odm .verdict b{font-style:italic;font-weight:900;font-size:12px;letter-spacing:.14em;color:var(--p5ink)}
+  .odm .verdict b.g{color:var(--gold)}
+  .odm .mid{display:flex;gap:11px;padding-top:9px;align-items:flex-start}
+  .odm .photo{width:86px;height:86px;flex:none;border-radius:3px;border:3px solid #f7f5f2;overflow:hidden;transform:skewY(-4deg) rotate(-2deg);box-shadow:4px 5px 0 var(--p5ink);background:radial-gradient(120% 90% at 50% 25%,#3a2a20,#160f0a);display:flex;align-items:center;justify-content:center}
+  .odm .photo span{font-size:42px;transform:skewY(4deg)}
+  .odm .info{padding-top:5px;min-width:0}
+  .odm .food{font-size:15px;font-weight:900;font-style:italic;transform:skewX(-4deg)}
+  .odm .cal{font-size:24px;font-weight:900;font-style:italic;line-height:1;margin-top:6px;font-variant-numeric:tabular-nums}
+  .odm .cal i{font-size:11px;margin-left:2px;opacity:.9}
+  .odm .tag{align-self:flex-start;background:var(--p5ink);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;transform:skewX(-10deg);margin-top:7px}
+  .odm .tag.g{background:#2a2413;color:var(--gold)}
+  .odm .tag em{font-style:italic}
+  .odm .quote{position:relative;z-index:2;margin-top:auto;display:flex;gap:8px;align-items:center;padding:10px 13px;background:var(--p5ink);border-top:3px solid var(--p5red);font-size:11px;font-weight:700;line-height:1.5;color:#f2efe9}
+  .odm .quote .oh{width:30px;height:30px;flex:none}
+
+  /* ── V2 cut-in ── */
+  .odm .c2 .band{position:absolute;inset:0;z-index:0;background:linear-gradient(114deg,var(--p5red) 0 47%,#0b0b0c 47% 100%)}
+  .odm .c2 .sil{position:absolute;right:-8px;bottom:-8px;width:64%;z-index:1;color:#0b0b0c;transform:rotate(6deg)}
+  .odm .c2 .sil svg{width:100%;height:auto;display:block}
+  .odm .c2 .pad{padding:18px 16px 16px}
+  .odm .c2 .kick2{font-size:10px;font-weight:900;letter-spacing:.2em;color:#0b0b0c}
+  .odm .c2 .v2{font-style:italic;font-weight:900;font-size:72px;line-height:.82;color:#f7f5f2;-webkit-text-stroke:3px #0b0b0c;paint-order:stroke fill;transform:skewX(-6deg);margin-top:2px}
+  .odm .c2 .sub2{font-size:12px;font-weight:800;color:#0b0b0c;transform:skewX(-4deg);margin-top:6px}
+  .odm .c2 .q2{position:relative;z-index:2;margin-top:auto;font-size:11px;font-weight:700;color:#f2efe9;padding:10px 15px;background:rgba(11,11,12,.82)}
+
+  /* ── V3 navy/gold (無罪) ── */
+  .odm .c3{background:#0f0f24}
+  .odm .c3 .red{background:linear-gradient(160deg,#1c1c46,#141433);clip-path:polygon(0 0,100% 0,100% 76%,0 97%)}
+  .odm .c3 .kick{color:var(--gold)}
+  .odm .c3 .verdict em{color:#f9f2da;-webkit-text-stroke:2.4px #2a2413}
+  .odm .c3 .food,.odm .c3 .cal{color:#f7f5f2}
+  .odm .c3 .quote{border-top-color:var(--gold)}
+
+  /* ── V4 collection/rare ── */
+  .odm .c4 .foil{position:absolute;top:0;right:0;width:78px;height:78px;z-index:1;background:conic-gradient(from 40deg,#ff3b30,#f2b01e,#12b886,#3b7de5,#ff3b30);opacity:.55;filter:blur(1px);clip-path:polygon(100% 0,0 0,100% 100%)}
+  .odm .c4 .pad{padding:12px 13px}
+  .odm .c4 .crare{font-size:9.5px;font-weight:900;letter-spacing:.04em;color:var(--p5ink);display:flex;justify-content:space-between;align-items:center}
+  .odm .c4 .crare .rr{color:#7a0000}
+  .odm .c4 .cphoto{width:100%;aspect-ratio:16/10;border-radius:4px;border:3px solid #f7f5f2;overflow:hidden;box-shadow:4px 5px 0 var(--p5ink);margin-top:8px;background:radial-gradient(120% 90% at 50% 25%,#3a2a20,#160f0a);display:flex;align-items:center;justify-content:center}
+  .odm .c4 .cphoto span{font-size:56px}
+  .odm .c4 .cname{font-size:15px;font-weight:900;font-style:italic;margin-top:9px;display:flex;align-items:center;gap:7px;color:#f7f5f2;transform:skewX(-4deg)}
+  .odm .c4 .cname em{font-style:italic;font-size:10px;background:var(--p5red);color:#fff;padding:2px 8px}
+  .odm .c4 .cstats{font-size:10.5px;font-weight:800;color:var(--p5ink);margin-top:6px;font-variant-numeric:tabular-nums}
+  .odm .c4 .ctext{font-size:10px;font-weight:600;color:#f2efe9;background:var(--p5ink);border-radius:6px;padding:8px 10px;margin-top:8px;line-height:1.5}
+
+  .odm .foot{margin-top:40px;border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:var(--ink2);line-height:1.7}
+  .odm .foot b{color:var(--ink)}
+</style>
+
+<div class="odm">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="oni" viewBox="0 0 60 60">
+    <path d="M17 15 Q13 3 21 6 Q23 11 25 16 Z" fill="#F3E4C6" stroke="#c9a763" stroke-width="1"/>
+    <path d="M43 15 Q47 3 39 6 Q37 11 35 16 Z" fill="#F3E4C6" stroke="#c9a763" stroke-width="1"/>
+    <path d="M30 9 C45 9 51 21 51 33 C51 47 42 55 30 55 C18 55 9 47 9 33 C9 21 15 9 30 9 Z" fill="#DA4034"/>
+    <rect x="8" y="21" width="44" height="8" rx="1" fill="#fff"/>
+    <circle cx="30" cy="25" r="4" fill="#DA4034"/>
+    <path d="M17 35 L27 38" stroke="#3a0f0a" stroke-width="3.6" stroke-linecap="round"/>
+    <path d="M43 35 L33 38" stroke="#3a0f0a" stroke-width="3.6" stroke-linecap="round"/>
+    <circle cx="23" cy="41" r="3.2" fill="#fff"/><circle cx="23.6" cy="41.4" r="1.7" fill="#160000"/>
+    <circle cx="37" cy="41" r="3.2" fill="#fff"/><circle cx="36.4" cy="41.4" r="1.7" fill="#160000"/>
+    <path d="M23 49 Q30 45 37 49" stroke="#3a0f0a" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+    <path d="M27 47.5 L28.5 51.5 L30 47.5 Z" fill="#fff"/>
+  </symbol>
+  <symbol id="onisil" viewBox="0 0 60 60">
+    <path d="M17 15 Q13 3 21 6 Q23 11 25 16 Z M43 15 Q47 3 39 6 Q37 11 35 16 Z M30 9 C45 9 51 21 51 33 C51 47 42 55 30 55 C18 55 9 47 9 33 C9 21 15 9 30 9 Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="star" viewBox="0 0 24 24"><path d="M12 1l2.9 7.3L22 9l-5.5 4.6L18.4 21 12 16.9 5.6 21l1.9-7.4L2 9l7.1-.7z" fill="currentColor"/></symbol>
+</svg>
+
+<div class="wrap">
+  <div class="eyebrow">怒られカード · 4案</div>
+  <h1>撮った瞬間の"<b>怒られカード</b>"、4案。</h1>
+  <p class="lede">すべて<b>判定＝シェアの1枚</b>／ペルソナ5系。ドラマの出し方（過激さ・キャラの見せ方・褒め版・コレクション性）を振ってあります。ベースにする1案を選んでください。</p>
+
+  <div class="grid">
+
+    <!-- A 正統 -->
+    <div class="item">
+      <div class="card c1">
+        <div class="red"></div><div class="dots"></div>
+        <svg class="star"><use href="#star"/></svg>
+        <div class="pad">
+          <div class="kick">RESULT ── 深夜 24:41</div>
+          <div class="verdict"><em>有罪</em><b>GUILTY</b></div>
+          <div class="mid">
+            <div class="photo"><span>🍜</span></div>
+            <div class="info">
+              <div class="food">締めのラーメン</div>
+              <div class="cal">520<i>kcal</i></div>
+              <div class="tag">歩き <em>47分</em></div>
+            </div>
+          </div>
+        </div>
+        <div class="quote"><svg class="oh"><use href="#oni"/></svg><span>「今 何時やと思てんの。」</span></div>
+      </div>
+      <div class="cap"><div class="n">A · 正統P5</div><div class="t">バランス型</div><div class="d">読みやすさとオシャレの両立。<b>情報（kcal/PFC/歩き分）もちゃんと見える</b>安全な基準案。</div></div>
+    </div>
+
+    <!-- B カットイン -->
+    <div class="item">
+      <div class="card c2">
+        <div class="band"></div><div class="dots"></div>
+        <div class="sil"><svg viewBox="0 0 60 60"><use href="#onisil"/></svg></div>
+        <div class="pad">
+          <div class="kick2">ALL-OUT · GUILTY</div>
+          <div class="v2">有罪</div>
+          <div class="sub2">締めのラーメン ／ 520kcal</div>
+          <div class="q2">「今日の努力、ぜんぶチャラや。」— 鬼コーチ</div>
+        </div>
+      </div>
+      <div class="cap"><div class="n">B · カットイン</div><div class="t">最大ドラマ</div><div class="d">P5の"総攻撃"風。<b>鬼コーチの黒シルエットが爆発</b>、情報を削って一撃の映え。<b>一番バズ狙い</b>。</div></div>
+    </div>
+
+    <!-- C 無罪 -->
+    <div class="item">
+      <div class="card c3">
+        <div class="red"></div><div class="dots"></div>
+        <svg class="star g"><use href="#star"/></svg>
+        <div class="pad">
+          <div class="kick g">CLEAR ── 21:30</div>
+          <div class="verdict"><em class="g">無罪</em><b class="g">MERCY</b></div>
+          <div class="mid">
+            <div class="photo"><span>🥗</span></div>
+            <div class="info">
+              <div class="food">サラダチキン</div>
+              <div class="cal">210<i>kcal</i></div>
+              <div class="tag g">痩せ貯金 <em>+300</em></div>
+            </div>
+          </div>
+        </div>
+        <div class="quote"><svg class="oh"><use href="#oni"/></svg><span>「お、ちゃんと選んだやん。褒めたる。」</span></div>
+      </div>
+      <div class="cap"><div class="n">C · 無罪（褒め版）</div><div class="t">紺×金の"勝ち"</div><div class="d">良い選択の時の裏面。<b>怒られ⇄褒めのギャップ</b>が効く。同じ枠で色だけ替える設計＝実装も軽い。</div></div>
+    </div>
+
+    <!-- D コレクション -->
+    <div class="item">
+      <div class="card c4">
+        <div class="red"></div><div class="dots"></div><div class="foil"></div>
+        <div class="pad">
+          <div class="crare"><span>深夜モンスター</span><span class="rr">★★★★☆ No.041</span></div>
+          <div class="cphoto"><span>🍜</span></div>
+          <div class="cname">締めのラーメン <em>有罪</em></div>
+          <div class="cstats">ATK 520 ／ 糖質 68 ／ 深夜補正 +30%</div>
+          <div class="ctext">効果：深夜24時に召喚成功時、鬼コーチが必ずブチギレる。「今 何時やと思てんの…」</div>
+        </div>
+      </div>
+      <div class="cap"><div class="n">D · コレクション</div><div class="t">レアカード化</div><div class="d">食事を<b>集める・レア度がつく</b>トレカ風。ガチャ/図鑑=<b>課金と継続の柱</b>に化けうる将来性重視案。</div></div>
+    </div>
+
+  </div>
+
+  <div class="foot">
+    どれも「撮った瞬間＝シェア用の1枚」。おすすめは —— まず<b>Aを基準</b>に据えて、拡散を狙う瞬間だけ<b>B（カットイン）</b>を切替表示、良い選択は<b>C（無罪）</b>、そして<b>D（コレクション）</b>は継続・課金フックとして後段で足す、の合わせ技。<br>気に入った番号（複数可）と「ここをこう」を教えてください。選んだ案で本体モックに統合します。
+  </div>
+</div>
+</div>

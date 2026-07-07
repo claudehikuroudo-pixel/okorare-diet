@@ -1,0 +1,248 @@
+<style>
+  .odm{
+    --paper:#F5F4F1; --card:#FFFFFF; --ink:#1A1613; --ink2:#726A61;
+    --line:#EAE7E2; --accent:#E4022B; --accent2:#FF3B30;
+    --p:#3B7DE5; --f:#F5A524; --c:#12B886; --green:#12B886;
+    --p5red:#E4022B; --p5ink:#0B0B0C; --p5paper:#F7F5F2;
+    --fdisp:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+    color:var(--ink);font-family:var(--fdisp);line-height:1.5;-webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(90% 60% at 12% -8%, #fbe3e3 0%, rgba(251,227,227,0) 42%),
+      radial-gradient(80% 55% at 100% 0%, #eef4f0 0%, rgba(238,244,240,0) 45%),
+      var(--paper);
+    padding:40px 20px 72px;min-height:100vh;
+  }
+  .odm *{box-sizing:border-box}
+  .odm .wrap{max-width:1080px;margin:0 auto}
+
+  .odm .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin-bottom:14px}
+  .odm .eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);border-radius:2px}
+  .odm h1{font-size:clamp(30px,5vw,50px);font-weight:900;letter-spacing:-.02em;line-height:1.04;text-wrap:balance;margin:0 0 16px}
+  .odm h1 b{color:var(--accent)}
+  .odm .lede{font-size:clamp(15px,1.6vw,18px);color:var(--ink2);max-width:62ch;margin:0}
+  .odm .lede b{color:var(--ink);font-weight:700}
+
+  .odm .stage{margin-top:44px;display:grid;gap:28px 26px;grid-template-columns:repeat(2,minmax(0,1fr));max-width:680px;margin-inline:auto;align-items:start}
+  @media(max-width:640px){.odm .stage{grid-template-columns:1fr;max-width:340px}}
+  .odm .col{display:flex;flex-direction:column;gap:16px}
+  .odm .caption{display:flex;flex-direction:column;gap:6px;padding:0 4px}
+  .odm .cnum{font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--accent)}
+  .odm .ctitle{font-size:17px;font-weight:800;letter-spacing:-.01em}
+  .odm .cbody{font-size:13px;color:var(--ink2);line-height:1.6}
+  .odm .cbody b{color:var(--ink)}
+
+  .odm .phone{position:relative;width:100%;aspect-ratio:293/620;border-radius:40px;background:#0b0a0c;padding:9px;box-shadow:0 2px 4px rgba(31,20,12,.05),0 26px 50px -18px rgba(31,20,12,.34)}
+  .odm .screen{position:relative;width:100%;height:100%;border-radius:32px;overflow:hidden;background:var(--paper);display:flex;flex-direction:column}
+  .odm .notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:78px;height:6px;background:rgba(255,255,255,.22);border-radius:6px;z-index:5}
+  .odm .stbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px 4px;font-size:12px;font-weight:700}
+  .odm .stbar .dots{letter-spacing:1px;opacity:.7}
+  .odm .p5screen .stbar,.odm .p5screen .dots{color:#fff}
+  .odm .body{flex:1;overflow:hidden;padding:6px 18px 18px;display:flex;flex-direction:column;gap:14px}
+
+  /* ── HOME ── */
+  .odm .greet{font-size:12px;color:var(--ink2);font-weight:700}
+  .odm .greet b{color:var(--ink)}
+  .odm .h-title{font-size:19px;font-weight:900;letter-spacing:-.01em;margin-top:-4px}
+  .odm .ringcard{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:20px 18px;display:flex;flex-direction:column;align-items:center;gap:4px}
+  .odm .ring{position:relative;width:150px;height:150px}
+  .odm .ring svg{transform:rotate(-90deg);display:block}
+  .odm .ring .ctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .odm .ring .big{font-size:34px;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1;color:var(--green)}
+  .odm .ring .big small{font-size:15px;font-weight:800;color:var(--ink2)}
+  .odm .ring .lbl{font-size:11px;font-weight:800;color:var(--ink2);letter-spacing:.06em;margin-top:5px}
+  .odm .forecast{font-size:12.5px;color:var(--ink2);font-weight:600;text-align:center}
+  .odm .forecast b{color:var(--green);font-weight:800}
+  .odm .macros{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .odm .macro{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:3px}
+  .odm .macro .mbar{width:100%;height:5px;border-radius:5px;background:var(--line);overflow:hidden}
+  .odm .macro .mbar i{display:block;height:100%;border-radius:5px}
+  .odm .macro .mk{font-size:10px;font-weight:800;color:var(--ink2)}
+  .odm .macro .mv{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
+  .odm .seclbl{font-size:11px;font-weight:800;color:var(--ink2);letter-spacing:.08em;margin:2px 2px -2px}
+  .odm .logrow{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 12px;display:flex;align-items:center;gap:11px}
+  .odm .thumb{width:38px;height:38px;border-radius:11px;flex:none;display:flex;align-items:center;justify-content:center;font-size:20px}
+  .odm .logrow .lt{flex:1;min-width:0}
+  .odm .logrow .l1{font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .odm .logrow .l2{font-size:11px;color:var(--ink2);font-weight:600}
+  .odm .kc{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
+  .odm .tag-guilty{font-size:9.5px;font-weight:900;font-style:italic;color:#fff;background:var(--accent);border-radius:3px;padding:2px 7px;transform:skewX(-8deg);display:inline-block}
+  .odm .fab{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:60px;height:60px;border-radius:20px;background:linear-gradient(150deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px;box-shadow:0 10px 22px -6px rgba(228,2,43,.55);z-index:6}
+  .odm .tabbar{position:absolute;bottom:0;left:0;right:0;height:64px;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;padding:0 26px;z-index:4}
+  .odm .tabbar span{font-size:20px;opacity:.4}
+  .odm .tabbar span.on{opacity:1}
+
+  /* ── 怒られカード（結果＝シェア・ペルソナ5演出） ── */
+  .odm .p5screen{background:var(--p5ink)}
+  .odm .p5{position:relative;flex:1;overflow:hidden;display:flex;flex-direction:column;background:var(--p5ink);color:var(--p5paper);font-family:var(--fdisp)}
+  .odm .p5 .bgred{position:absolute;top:-6%;left:-6%;right:-6%;height:70%;background:var(--p5red);clip-path:polygon(0 0,100% 0,100% 76%,0 97%);z-index:0}
+  .odm .p5 .bghalf{position:absolute;inset:0;z-index:0;opacity:.15;background-image:radial-gradient(#000 1.1px,transparent 1.5px);background-size:7px 7px}
+  .odm .p5 .star{position:absolute;top:12px;right:14px;width:34px;height:34px;z-index:1;color:#fff;transform:rotate(12deg)}
+  .odm .p5>.z{position:relative;z-index:2}
+
+  .odm .p5top{padding:16px 16px 4px}
+  .odm .p5kick{font-size:10px;font-weight:900;letter-spacing:.24em;color:var(--p5ink)}
+  .odm .p5verdict{display:flex;align-items:baseline;gap:9px;transform:skewX(-6deg);margin-top:1px}
+  .odm .p5verdict em{font-style:italic;font-weight:900;font-size:60px;line-height:.85;letter-spacing:2px;color:var(--p5paper);-webkit-text-stroke:2.5px var(--p5ink);paint-order:stroke fill}
+  .odm .p5verdict b{font-style:italic;font-weight:900;font-size:14px;letter-spacing:.16em;color:var(--p5ink)}
+
+  .odm .p5mid{display:flex;gap:13px;padding:4px 16px 0;align-items:flex-start}
+  .odm .p5photo{width:104px;height:104px;flex:none;border-radius:3px;border:3px solid var(--p5paper);overflow:hidden;transform:skewY(-4deg) rotate(-2deg);box-shadow:5px 6px 0 var(--p5ink);background:radial-gradient(120% 90% at 50% 25%,#3a2a20,#160f0a);display:flex;align-items:center;justify-content:center}
+  .odm .p5photo span{font-size:52px;transform:skewY(4deg)}
+  .odm .p5info{padding-top:8px;min-width:0}
+  .odm .p5food{font-size:16px;font-weight:900;font-style:italic;transform:skewX(-4deg);color:var(--p5paper)}
+  .odm .p5stats{display:flex;flex-direction:column;gap:6px;margin-top:9px}
+  .odm .p5cal{font-size:27px;font-weight:900;font-style:italic;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+  .odm .p5cal i{font-size:12px;font-style:italic;margin-left:3px;opacity:.9}
+  .odm .p5tag{align-self:flex-start;background:var(--p5ink);color:#fff;font-size:10.5px;font-weight:800;padding:4px 10px;transform:skewX(-10deg);letter-spacing:.03em}
+  .odm .p5tag em{font-style:italic;font-weight:900}
+
+  .odm .p5quote{margin-top:auto;display:flex;gap:10px;align-items:center;padding:12px 15px;background:var(--p5ink);border-top:3px solid var(--p5red);font-size:12px;font-weight:700;line-height:1.55;color:#f2efe9}
+  .odm .p5quote .who{color:#ff5b52;font-weight:900;font-size:10px;letter-spacing:.05em;display:block;margin-bottom:1px}
+  .odm .p5quote svg{width:36px;height:36px;flex:none}
+  .odm .p5btns{display:flex;gap:8px;padding:0 12px 13px;background:var(--p5ink)}
+  .odm .p5btn{flex:1;text-align:center;font-weight:900;font-style:italic;font-size:13px;padding:12px;transform:skewX(-8deg);letter-spacing:.02em}
+  .odm .p5btn.solid{background:var(--p5red);color:#fff}
+  .odm .p5btn.out{background:transparent;border:2px solid var(--p5paper);color:var(--p5paper)}
+  .odm .p5btn span{display:inline-block;transform:skewX(8deg)}
+
+  /* ── evidence ── */
+  .odm .notes{margin-top:52px;border-top:1px solid var(--line);padding-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+  .odm .note h4{font-size:13px;font-weight:900;margin:0 0 5px;display:flex;align-items:center;gap:7px}
+  .odm .note h4 i{width:7px;height:7px;border-radius:2px;background:var(--accent);display:inline-block}
+  .odm .note p{font-size:12.5px;color:var(--ink2);margin:0;line-height:1.65}
+  .odm .note p b{color:var(--ink)}
+  .odm .src{margin-top:30px;font-size:11px;color:var(--ink2);opacity:.8;line-height:1.7}
+</style>
+
+<div class="odm">
+<div class="wrap">
+
+  <div class="eyebrow">Design direction · v4 ペルソナ5演出</div>
+  <h1>撮った瞬間、<b>結果はもう"作品"</b>。</h1>
+  <p class="lede">判定結果とシェアカードは<b>1枚に統合</b>。写真を撮った瞬間に出る"怒られカード"を、<b>ペルソナ5の結果スプラッシュ演出</b>（赤×黒・斜めスキュー・極太イタリック）に振り切る。オシャレでSNS映え＝そのまま拡散する。本体UIはCal AI/YAZIO型のクリーンさで下支え。</p>
+
+  <div class="stage">
+
+    <!-- 1. HOME -->
+    <div class="col">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="stbar"><span>21:04</span><span class="dots">●●● ⛁</span></div>
+          <div class="body">
+            <div>
+              <div class="greet">こんばんは、<b>拓也さん</b></div>
+              <div class="h-title">今日はまだ、間に合う。</div>
+            </div>
+            <div class="ringcard">
+              <div class="ring">
+                <svg width="150" height="150" viewBox="0 0 150 150">
+                  <circle cx="75" cy="75" r="63" fill="none" stroke="#EFEBE6" stroke-width="14"/>
+                  <circle cx="75" cy="75" r="63" fill="none" stroke="#12B886" stroke-width="14" stroke-linecap="round" stroke-dasharray="396" stroke-dashoffset="150"/>
+                </svg>
+                <div class="ctr">
+                  <div class="big">＋480<small> kcal</small></div>
+                  <div class="lbl">今日の痩せ貯金</div>
+                </div>
+              </div>
+              <div class="forecast">この調子なら <b>8/2 に −3kg</b> ペース</div>
+            </div>
+            <div class="macros">
+              <div class="macro"><div class="mk">たんぱく</div><div class="mv">62<span style="font-size:10px;color:var(--ink2)">g</span></div><div class="mbar"><i style="width:70%;background:var(--p)"></i></div></div>
+              <div class="macro"><div class="mk">脂質</div><div class="mv">48<span style="font-size:10px;color:var(--ink2)">g</span></div><div class="mbar"><i style="width:82%;background:var(--f)"></i></div></div>
+              <div class="macro"><div class="mk">炭水化</div><div class="mv">180<span style="font-size:10px;color:var(--ink2)">g</span></div><div class="mbar"><i style="width:60%;background:var(--c)"></i></div></div>
+            </div>
+            <div class="seclbl">今日の記録</div>
+            <div class="logrow">
+              <div class="thumb" style="background:#fff4e8">🍳</div>
+              <div class="lt"><div class="l1">目玉焼きとトースト</div><div class="l2">朝食・8:12</div></div>
+              <div class="kc">420</div>
+            </div>
+            <div class="logrow">
+              <div class="thumb" style="background:#fdeceb">🥜</div>
+              <div class="lt"><div class="l1">柿ピー <span class="tag-guilty">有罪</span></div><div class="l2">間食・20:58</div></div>
+              <div class="kc">305</div>
+            </div>
+          </div>
+          <div class="fab">＋</div>
+          <div class="tabbar"><span class="on">🏠</span><span>📊</span><span>🏃</span><span>👤</span></div>
+        </div>
+      </div>
+      <div class="caption">
+        <span class="cnum">01 · ホーム</span>
+        <span class="ctitle">痩せ貯金リング＋痩せ予測</span>
+        <span class="cbody"><b>Cal AI型のリング可視化</b>を旗＝「見るだけで痩せる」に合わせ<b>痩せ貯金</b>（プラスで貯まる前向き表現）で。未来予測フックで継続。</span>
+      </div>
+    </div>
+
+    <!-- 2. 怒られカード (P5) -->
+    <div class="col">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen p5screen">
+          <div class="stbar"><span>24:41</span><span class="dots">●●● ⛁</span></div>
+          <div class="p5">
+            <div class="bgred"></div>
+            <div class="bghalf"></div>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l2.9 7.3L22 9l-5.5 4.6L18.4 21 12 16.9 5.6 21l1.9-7.4L2 9l7.1-.7z"/></svg>
+
+            <div class="z p5top">
+              <div class="p5kick">RESULT ── 深夜 24:41 の判定</div>
+              <div class="p5verdict"><em>有罪</em><b>GUILTY</b></div>
+            </div>
+
+            <div class="z p5mid">
+              <div class="p5photo"><span>🍜</span></div>
+              <div class="p5info">
+                <div class="p5food">締めのラーメン</div>
+                <div class="p5stats">
+                  <div class="p5cal">520<i>kcal</i></div>
+                  <div class="p5tag">P22 · F18 · C68</div>
+                  <div class="p5tag">帳消しに歩き <em>47分</em></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="z p5quote">
+              <svg viewBox="0 0 60 60" fill="none" aria-label="鬼コーチ">
+                <path d="M17 15 Q13 3 21 6 Q23 11 25 16 Z" fill="#F3E4C6" stroke="#c9a763" stroke-width="1"/>
+                <path d="M43 15 Q47 3 39 6 Q37 11 35 16 Z" fill="#F3E4C6" stroke="#c9a763" stroke-width="1"/>
+                <path d="M30 9 C45 9 51 21 51 33 C51 47 42 55 30 55 C18 55 9 47 9 33 C9 21 15 9 30 9 Z" fill="#DA4034"/>
+                <rect x="8" y="21" width="44" height="8" rx="1" fill="#fff"/>
+                <circle cx="30" cy="25" r="4" fill="#DA4034"/>
+                <path d="M17 35 L27 38" stroke="#3a0f0a" stroke-width="3.6" stroke-linecap="round"/>
+                <path d="M43 35 L33 38" stroke="#3a0f0a" stroke-width="3.6" stroke-linecap="round"/>
+                <circle cx="23" cy="41" r="3.2" fill="#fff"/><circle cx="23.6" cy="41.4" r="1.7" fill="#160000"/>
+                <circle cx="37" cy="41" r="3.2" fill="#fff"/><circle cx="36.4" cy="41.4" r="1.7" fill="#160000"/>
+                <path d="M23 49 Q30 45 37 49" stroke="#3a0f0a" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+                <path d="M27 47.5 L28.5 51.5 L30 47.5 Z" fill="#fff"/>
+              </svg>
+              <div><span class="who">鬼コーチ</span>は？今 何時だと思ってんの。締めのラーメンで、今日の努力ぜんぶチャラや。</div>
+            </div>
+            <div class="z p5btns">
+              <div class="p5btn solid"><span>記録する</span></div>
+              <div class="p5btn out"><span>𝕏 でシェア</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="caption">
+        <span class="cnum">02 · 怒られカード</span>
+        <span class="ctitle">結果＝シェア（ペルソナ5演出）</span>
+        <span class="cbody">判定とシェアを<b>1枚に統合</b>。撮った瞬間この"作品"が出る＝そのまま拡散。<b>P5の赤×黒スタイリッシュ</b>でSNS映え最強、怒られ/毒舌のトーンとも相性◎。褒め時は「無罪＝MERCY」版に。</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="notes">
+    <div class="note"><h4><i></i>写真→即結果＝勝ち筋</h4><p><b>Cal AI</b>（$40M ARR・DL1500万・継続率30%）はこの1タップで市場を作り、2026年初にMyFitnessPalが買収。"動画で見せられる"＝勝手にデモされる。</p></div>
+    <div class="note"><h4><i></i>キャラは継続と拡散の核</h4><p><b>あすけん</b>（国内No.1・1,200万超）の未来さんは食事に表情で反応しグッズ化。<b>鬼コーチ×毒舌</b>で差別化・愛される顔を狙う。</p></div>
+    <div class="note"><h4><i></i>結果は"作品"として出す</h4><p>拡散の燃料は自虐シェア。判定＝シェアを1枚に統合し、誰もが知る<b>P5演出</b>に振ることで"見せたくなる"を最大化。</p></div>
+    <div class="note"><h4><i></i>課金は自分事化→無料→年額</h4><p>Cal AIは<b>クイズ型オンボ28ステップ</b>（目標/減量ペース）で自分事化→3日無料→年額$29.99。後続フェーズで実装。</p></div>
+  </div>
+
+  <p class="src">出典: getlatka（Cal AI ARR）／ superframeworks・screensdesign（Cal AI ケース/UI）／ Fortune・cybernews（2026 比較）／ あすけん公式・pixiv百科（未来さん）。※ペルソナ5等の演出は雰囲気オマージュ（実ロゴ/素材は不使用）。数値は2026-07時点。</p>
+
+</div>
+</div>

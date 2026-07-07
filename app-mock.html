@@ -1,0 +1,270 @@
+<meta charset="utf-8">
+<style>
+  .odm{
+    --paper:#F6F5F2; --card:#FFFFFF; --ink:#1A1613; --sub:#8A8178; --line:#ECE9E4;
+    --accent:#E4022B; --good:#1FA971; --warn:#E8890B; --deep:#241206;
+    --mincho:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+    --g:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",system-ui,sans-serif;
+    color:var(--ink);font-family:var(--g);line-height:1.5;-webkit-font-smoothing:antialiased;
+    background:radial-gradient(70% 40% at 20% -8%,#fbe3e3 0,rgba(251,227,227,0) 45%),#17141a;
+    padding:40px 20px 64px;min-height:100vh;
+  }
+  .odm *{box-sizing:border-box}
+  .odm .wrap{max-width:1120px;margin:0 auto}
+  .odm .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:800;letter-spacing:.22em;color:#e0a24a;text-transform:uppercase;margin-bottom:12px}
+  .odm .eyebrow::before{content:"";width:24px;height:1.5px;background:linear-gradient(90deg,#e0a24a,transparent)}
+  .odm h1{font-family:var(--mincho);font-size:clamp(24px,4vw,36px);font-weight:900;margin:0 0 10px;color:#F6F5F2}
+  .odm h1 b{color:#e0a24a}
+  .odm .lede{font-size:14px;color:#b9afa4;max-width:64ch;margin:0 0 34px}
+  .odm .lede b{color:#F6F5F2}
+
+  .odm .rail{display:flex;gap:34px;flex-wrap:wrap;justify-content:center}
+  .odm .col{display:flex;flex-direction:column;gap:12px;width:300px}
+  .odm .cap{font-size:12px;color:#b9afa4;text-align:center;line-height:1.5}
+  .odm .cap b{color:#F6F5F2}
+
+  /* phone */
+  .odm .phone{width:300px;border-radius:36px;background:var(--paper);overflow:hidden;position:relative;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.6), inset 0 0 0 8px #0d0b10, inset 0 0 0 9px #2a2630;height:712px;display:flex;flex-direction:column}
+  .odm .sb{display:flex;justify-content:space-between;align-items:center;padding:12px 22px 4px;font-size:12px;font-weight:700;color:var(--ink)}
+  .odm .sb .dots{letter-spacing:1px;color:#6f6a63}
+  .odm .scr{flex:1;overflow:hidden;display:flex;flex-direction:column}
+  .odm .body{flex:1;overflow:hidden;padding:6px 16px 0;display:flex;flex-direction:column;gap:11px}
+
+  .odm .tab{display:flex;justify-content:space-around;align-items:center;padding:9px 8px 14px;border-top:1px solid var(--line);background:#fff}
+  .odm .tab a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9px;font-weight:700;color:#b7b0a7}
+  .odm .tab a.on{color:var(--accent)}
+  .odm .tab .ic{width:22px;height:22px;display:grid;place-items:center;font-size:17px}
+
+  /* generic card */
+  .odm .c{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px}
+  .odm .clab{font-size:10px;font-weight:800;letter-spacing:.1em;color:var(--sub);text-transform:uppercase}
+
+  /* home header */
+  .odm .hd{display:flex;align-items:center;justify-content:space-between;padding:4px 2px 0}
+  .odm .hd .hi{font-size:17px;font-weight:900}
+  .odm .hd .hi small{display:block;font-size:11px;color:var(--sub);font-weight:700;margin-top:1px}
+  .odm .streak{display:flex;align-items:center;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 11px;font-size:13px;font-weight:900}
+  .odm .streak b{color:var(--accent)}
+
+  /* goal */
+  .odm .goal{display:flex;flex-direction:column;gap:9px}
+  .odm .goal .top{display:flex;align-items:baseline;justify-content:space-between}
+  .odm .goal .big{font-size:15px;font-weight:900}
+  .odm .goal .rem{font-size:12px;color:var(--sub);font-weight:800}
+  .odm .goal .rem b{color:var(--accent);font-size:15px}
+  .odm .bar{height:9px;border-radius:99px;background:#efece7;overflow:hidden}
+  .odm .bar i{display:block;height:100%;width:36%;background:linear-gradient(90deg,#ff8a3d,var(--accent))}
+  .odm .goal .sub{display:flex;justify-content:space-between;font-size:10px;color:var(--sub);font-weight:700}
+
+  /* balance ring */
+  .odm .bal{display:flex;align-items:center;gap:14px}
+  .odm .ring{width:96px;height:96px;flex:none;position:relative;display:grid;place-items:center;border-radius:50%;
+    background:conic-gradient(var(--good) 0 68%, #eceae5 68% 100%)}
+  .odm .ring::before{content:"";position:absolute;inset:9px;border-radius:50%;background:#fff}
+  .odm .ring .v{position:relative;text-align:center}
+  .odm .ring .v b{font-size:20px;font-weight:900;color:var(--good);line-height:1}
+  .odm .ring .v small{display:block;font-size:8.5px;color:var(--sub);font-weight:800;margin-top:2px}
+  .odm .bal .info .t{font-size:12px;font-weight:900}
+  .odm .bal .info .p{font-size:11px;color:var(--sub);margin-top:4px;line-height:1.5}
+  .odm .bal .info .p b{color:var(--ink)}
+
+  /* oni coach bar */
+  .odm .coach{display:flex;gap:10px;align-items:center;background:linear-gradient(120deg,#2a1410,#3a1a12);border-radius:16px;padding:12px 13px;color:#f4e7de}
+  .odm .coach svg{width:38px;height:38px;flex:none}
+  .odm .coach .msg{font-size:11.5px;font-weight:700;line-height:1.5}
+  .odm .coach .who{display:block;font-size:9px;font-weight:900;color:#ff8a72;letter-spacing:.06em;margin-bottom:2px}
+
+  /* today log */
+  .odm .log{display:flex;gap:8px}
+  .odm .meal{flex:1;border:1px solid var(--line);border-radius:12px;padding:8px 6px;text-align:center;background:#fff}
+  .odm .meal .m{font-size:10px;color:var(--sub);font-weight:800}
+  .odm .meal .s{font-size:18px;margin-top:2px}
+  .odm .meal.miss{border-style:dashed;border-color:#e6b9b9}
+  .odm .meal.miss .s{color:var(--accent)}
+
+  .odm .fab{margin-top:auto;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--accent);color:#fff;border-radius:16px;padding:14px;font-size:15px;font-weight:900;box-shadow:0 10px 22px -8px rgba(228,2,43,.6)}
+
+  /* ===== screen 2 verdict ===== */
+  .odm .shot{flex:1;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;padding:14px}
+  .odm .vcard{width:210px;border-radius:14px;padding:8px;display:flex;flex-direction:column;gap:5px;color:#1a1206;
+    background:linear-gradient(150deg,#e79235,#a9560f 60%,#743509);border:1px solid #37190a;position:relative;overflow:hidden;
+    box-shadow:0 20px 40px -16px rgba(0,0,0,.6)}
+  .odm .vcard .nm{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(#f1d89c,#d3a75f);border:1px solid #6e4a1c;border-radius:5px;padding:4px 8px}
+  .odm .vcard .nm h5{margin:0;font-family:var(--mincho);font-weight:900;font-size:13px;color:#231205}
+  .odm .vcard .nm .md{width:19px;height:19px;border-radius:50%;background:radial-gradient(circle at 34% 28%,#5a6fc4,#151e48);color:#fff;font-size:9px;font-weight:900;display:grid;place-items:center;font-family:var(--mincho);border:1px solid rgba(255,255,255,.7)}
+  .odm .vcard .va{position:relative;aspect-ratio:1/0.72;border:2px solid #2a1408;border-radius:3px;background:radial-gradient(120% 100% at 50% 20%,#4a3428,#170f09);display:grid;place-items:center}
+  .odm .vcard .va span{font-size:52px;filter:drop-shadow(0 5px 9px rgba(0,0,0,.5))}
+  .odm .vcard .seal{position:absolute;bottom:5px;left:5px;transform:rotate(-9deg);font-family:var(--mincho);font-weight:900;font-size:17px;letter-spacing:2px;color:#f4483a;padding:1px 6px;border:2px solid #d9281c;border-radius:5px;text-shadow:0 0 7px rgba(230,40,30,.5)}
+  .odm .vcard .rb{display:flex;justify-content:space-between;align-items:center;font-size:8.5px;font-weight:900;color:#f2e8d2;background:linear-gradient(#3a2410,#241606);border:1px solid #180d04;border-radius:2px;padding:3px 7px}
+  .odm .vcard .rb .seg{display:inline-flex;gap:2px;margin-left:4px}
+  .odm .vcard .rb .seg i{width:8px;height:5px;border-radius:1px;background:linear-gradient(#ff7a52,#c81e14)}
+  .odm .vcard .tx{background:#efe7d3;border:1px solid #7a5a28;border-radius:3px;padding:5px 7px;font-size:9px;font-weight:600;color:#2a1c0c;line-height:1.45}
+  .odm .vcard .st{display:flex;align-items:baseline;justify-content:space-between;background:linear-gradient(#241206,#180b03);border-radius:4px;padding:4px 8px;color:#fff}
+  .odm .vcard .st .num{font-size:20px;font-weight:900;font-style:italic;font-variant-numeric:tabular-nums}
+  .odm .vcard .st .u{font-size:8px;color:#c9a36a;font-weight:700}
+  .odm .vcard .st .pc{font-size:9px;font-weight:800;color:#e8cfa0}
+  .odm .vcard .fe{background:linear-gradient(#f1d89c,#dcb972);border:1px solid #6e4a1c;border-radius:3px;padding:3px 6px;font-size:8.5px;font-weight:800;color:#3a2410;text-align:center}
+  .odm .shot .cc{font-size:11px;font-weight:800;color:#3a1a12;text-align:center;background:#fbeee6;border:1px solid #f0d3c4;border-radius:12px;padding:9px 12px;line-height:1.5}
+  .odm .shot .act{display:flex;gap:8px;width:100%}
+  .odm .shot .act button{flex:1;border:0;border-radius:12px;padding:11px;font-size:12px;font-weight:900;cursor:pointer}
+  .odm .shot .act .x{background:#111;color:#fff}
+  .odm .shot .act .g{background:#fff;border:1px solid var(--line);color:var(--ink)}
+
+  /* ===== screen 3 commit ===== */
+  .odm .decl{background:linear-gradient(140deg,#241206,#3a1a12);color:#f4e7de;border-radius:18px;padding:16px}
+  .odm .decl .k{font-size:9px;font-weight:900;letter-spacing:.14em;color:#ff9a80;text-transform:uppercase}
+  .odm .decl .big{font-size:22px;font-weight:900;margin:6px 0 2px}
+  .odm .decl .big b{color:#ffcf3d}
+  .odm .decl .dl{font-size:11px;color:#d9b3a6;font-weight:700}
+  .odm .decl .x{margin-top:12px;width:100%;background:#111;color:#fff;border:0;border-radius:12px;padding:11px;font-size:12.5px;font-weight:900;cursor:pointer}
+  .odm .cal{display:flex;gap:4px;flex-wrap:wrap}
+  .odm .cal i{width:24px;height:24px;border-radius:6px;background:#eceae5;display:grid;place-items:center;font-size:11px;font-weight:800;color:#b7b0a7}
+  .odm .cal i.on{background:var(--accent);color:#fff}
+  .odm .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .odm .row .t{font-size:13px;font-weight:800}
+  .odm .row .d{font-size:10.5px;color:var(--sub);margin-top:2px;line-height:1.4}
+  .odm .sw{width:44px;height:26px;border-radius:99px;background:var(--good);position:relative;flex:none}
+  .odm .sw::after{content:"";position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+  .odm .sw.off{background:#d8d4ce}.odm .sw.off::after{right:auto;left:3px}
+  .odm .dial{display:flex;gap:5px}
+  .odm .dial i{flex:1;height:6px;border-radius:99px;background:#eceae5}
+  .odm .dial i.on{background:linear-gradient(90deg,#ff8a3d,var(--accent))}
+  .odm .dialn{display:flex;justify-content:space-between;font-size:9px;color:var(--sub);font-weight:700;margin-top:5px}
+</style>
+
+<div class="odm">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="oni" viewBox="0 0 60 60">
+  <path d="M17 15 Q13 3 21 6 Q23 11 25 16 Z" fill="#F3E4C6"/><path d="M43 15 Q47 3 39 6 Q37 11 35 16 Z" fill="#F3E4C6"/>
+  <path d="M30 9 C45 9 51 21 51 33 C51 47 42 55 30 55 C18 55 9 47 9 33 C9 21 15 9 30 9 Z" fill="#DA4034"/>
+  <rect x="8" y="21" width="44" height="8" rx="1" fill="#fff"/><circle cx="30" cy="25" r="4" fill="#DA4034"/>
+  <path d="M17 35 L27 38" stroke="#3a0f0a" stroke-width="3.6" stroke-linecap="round"/><path d="M43 35 L33 38" stroke="#3a0f0a" stroke-width="3.6" stroke-linecap="round"/>
+  <circle cx="23" cy="41" r="3.2" fill="#fff"/><circle cx="23.6" cy="41.4" r="1.7" fill="#160000"/><circle cx="37" cy="41" r="3.2" fill="#fff"/><circle cx="36.4" cy="41.4" r="1.7" fill="#160000"/>
+  <path d="M23 49 Q30 45 37 49" stroke="#3a0f0a" stroke-width="2.8" fill="none" stroke-linecap="round"/><path d="M27 47.5 L28.5 51.5 L30 47.5 Z" fill="#fff"/>
+</symbol></svg>
+
+<div class="wrap">
+  <div class="eyebrow">怒られダイエット · 本体モック（結果ファースト）</div>
+  <h1>毎日開いて、<b>逃げられない</b>アプリ。</h1>
+  <p class="lede">目的は"痩せる"。カードは集める物でなく<b>コミットさせる装置</b>。明るい本体UI × 濃いカードの判定。辛口の矛先は<b>行動（逃げるな・続けろ）</b>——体型・人格は貶めない。</p>
+
+  <div class="rail">
+
+    <!-- ① HOME -->
+    <div class="col">
+      <div class="phone">
+        <div class="sb"><span>9:41</span><span class="dots">● ● ● ⛁</span></div>
+        <div class="scr"><div class="body">
+          <div class="hd"><div class="hi">拓也さん、おはよう<small>今日もラクに、逃げずに。</small></div><div class="streak">🔥<b>12</b></div></div>
+
+          <div class="c goal">
+            <div class="top"><span class="big">目標 −5.0kg</span><span class="rem">あと <b>3.2</b>kg</span></div>
+            <div class="bar"><i></i></div>
+            <div class="sub"><span>現在 68.2kg</span><span>期限 8/31（あと26日）</span></div>
+          </div>
+
+          <div class="c bal">
+            <div class="ring"><div class="v"><b>+480</b><small>痩せ貯金</small></div></div>
+            <div class="info">
+              <div class="t">今日は貯金ペース ◎</div>
+              <div class="p">この傾向なら <b>8/20ごろ −0.5kg</b><br><span style="color:var(--sub)">※あくまで傾向（幅あり）</span></div>
+            </div>
+          </div>
+
+          <div class="coach"><svg><use href="#oni"/></svg>
+            <div class="msg"><span class="who">鬼コーチ</span>まだ夜メシ撮ってへんな？逃げる気か。あと1枚で今日のノルマ達成やぞ。</div>
+          </div>
+
+          <div class="log">
+            <div class="meal"><div class="m">朝</div><div class="s">✅</div></div>
+            <div class="meal"><div class="m">昼</div><div class="s">✅</div></div>
+            <div class="meal miss"><div class="m">夜</div><div class="s">？</div></div>
+          </div>
+
+          <div class="fab">📷 メシを撮る</div>
+        </div></div>
+        <div class="tab">
+          <a class="on"><span class="ic">🏠</span>ホーム</a>
+          <a><span class="ic">📷</span>撮る</a>
+          <a><span class="ic">🎯</span>目標</a>
+          <a><span class="ic">🔥</span>記録</a>
+        </div>
+      </div>
+      <div class="cap"><b>① ホーム</b>／目標進捗・痩せ貯金・"まだ撮ってへんな？"の逃がさない導線。集めるUIじゃない。</div>
+    </div>
+
+    <!-- ② VERDICT -->
+    <div class="col">
+      <div class="phone">
+        <div class="sb"><span>0:41</span><span class="dots">● ● ● ⛁</span></div>
+        <div class="scr"><div class="shot">
+          <div style="font-size:11px;font-weight:900;letter-spacing:.1em;color:var(--sub)">判定完了 — 深夜 0:41</div>
+          <div class="vcard">
+            <div class="nm"><h5>締めのラーメン</h5><div class="md">深</div></div>
+            <div class="va"><span>🍜</span><span class="seal">有罪</span></div>
+            <div class="rb"><span>麺類・こってり・深夜</span><span>デブ度<span class="seg"><i></i><i></i><i></i><i></i><i></i></span></span></div>
+            <div class="tx">「24時にラーメン…お前の胃袋、夜勤手当出てんの？まあ、明日47分歩いたら見逃したる。」</div>
+            <div class="st"><div><span class="num">520</span><span class="u"> kcal</span></div><div class="pc">徒歩47分／ラン21分</div></div>
+            <div class="fe">🍬 角砂糖17個分 ・ 🍚 ごはん2.2杯分</div>
+          </div>
+          <div class="cc">今日の痩せ貯金：+480 → <b style="color:var(--accent)">−40kcal</b> に転落。逃げ切れなかったな。</div>
+          <div class="act"><button class="x">𝕏 で晒す</button><button class="g">記録した</button></div>
+        </div></div>
+        <div class="tab">
+          <a><span class="ic">🏠</span>ホーム</a>
+          <a class="on"><span class="ic">📷</span>撮る</a>
+          <a><span class="ic">🎯</span>目標</a>
+          <a><span class="ic">🔥</span>記録</a>
+        </div>
+      </div>
+      <div class="cap"><b>② 撮影→判定カード</b>／写真1枚→有罪カードがバーン。そのままX。カードは"今日コミットできたか"の顔。</div>
+    </div>
+
+    <!-- ③ COMMIT -->
+    <div class="col">
+      <div class="phone">
+        <div class="sb"><span>9:41</span><span class="dots">● ● ● ⛁</span></div>
+        <div class="scr"><div class="body">
+          <div class="hd"><div class="hi">コミット</div></div>
+
+          <div class="decl">
+            <div class="k">宣言中</div>
+            <div class="big">8/31までに <b>−5kg</b></div>
+            <div class="dl">失敗したら…下の"ステーク"参照。逃げ道なし。</div>
+            <button class="x">𝕏 で公開宣言する（＝一番効く）</button>
+          </div>
+
+          <div class="c">
+            <div class="clab">連続記録 STREAK</div>
+            <div class="row" style="margin:8px 0 10px"><div class="t">🔥 12日連続</div><div class="d" style="margin:0;color:var(--good);font-weight:800">自己ベスト更新中</div></div>
+            <div class="cal"><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i>13</i><i>14</i></div>
+          </div>
+
+          <div class="c">
+            <div class="row"><div><div class="t">ステーク（任意）</div><div class="d">達成できなきゃ ¥3,000 を寄付。<br>※賭博回避のチャリティ型</div></div><div class="sw"></div></div>
+          </div>
+
+          <div class="c">
+            <div class="row" style="margin-bottom:8px"><div class="t">辛口ダイアル</div><div class="d" style="margin:0">現在：辛口</div></div>
+            <div class="dial"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+            <div class="dialn"><span>甘やかし</span><span>標準</span><span>辛口</span><span>劇薬</span></div>
+          </div>
+
+          <div class="c">
+            <div class="row"><div><div class="t">鬼コーチの督促</div><div class="d">「飯撮った？」を逃さず通知</div></div><div class="sw"></div></div>
+          </div>
+        </div></div>
+        <div class="tab">
+          <a><span class="ic">🏠</span>ホーム</a>
+          <a><span class="ic">📷</span>撮る</a>
+          <a class="on"><span class="ic">🎯</span>目標</a>
+          <a><span class="ic">🔥</span>記録</a>
+        </div>
+      </div>
+      <div class="cap"><b>③ コミット</b>／公開宣言・ストリーク・任意ステーク・辛口ダイアル・督促通知。＝"逃がさない"仕掛け。</div>
+    </div>
+
+  </div>
+</div>
+</div>

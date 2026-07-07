@@ -1,0 +1,222 @@
+<style>
+  .odm{
+    --paper:#F5F4F1; --ink:#1A1613; --ink2:#726A61; --line:#EAE7E2; --accent:#E4022B;
+    --fdisp:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+    color:var(--ink);font-family:var(--fdisp);line-height:1.5;-webkit-font-smoothing:antialiased;
+    background:radial-gradient(90% 60% at 12% -8%,#fbe3e3 0,rgba(251,227,227,0) 42%),var(--paper);
+    padding:40px 20px 72px;min-height:100vh;
+  }
+  .odm *{box-sizing:border-box}
+  .odm .wrap{max-width:1120px;margin:0 auto}
+  .odm .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin-bottom:12px}
+  .odm .eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);border-radius:2px}
+  .odm h1{font-size:clamp(26px,4vw,40px);font-weight:900;letter-spacing:-.02em;margin:0 0 12px}
+  .odm h1 b{color:var(--accent)}
+  .odm .lede{font-size:15px;color:var(--ink2);max-width:64ch;margin:0}
+  .odm .lede b{color:var(--ink);font-weight:700}
+
+  .odm .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:26px;margin-top:38px;align-items:start}
+  .odm .item{display:flex;flex-direction:column;gap:11px}
+  .odm .cap{padding:0 2px}
+  .odm .cap .t{font-size:14px;font-weight:800}
+  .odm .cap .d{font-size:12px;color:var(--ink2);line-height:1.55;margin-top:2px}
+  .odm .cap .d b{color:var(--ink)}
+
+  /* ── カード（内容ぶんの高さ＝全容が必ず見える） ── */
+  .odm .yg{position:relative;border-radius:11px;padding:8px;display:flex;flex-direction:column;color:#1a1206;overflow:hidden;box-shadow:0 16px 34px -16px rgba(20,12,8,.5)}
+  .odm .yg.guilty{background:linear-gradient(165deg,#e0902f,#b0641a)}
+  .odm .yg.praise{background:linear-gradient(165deg,#8ab6da,#3f6fb0)}
+  .odm .yg.god{background:linear-gradient(165deg,#f7dd86,#c99a26)}
+  .odm .yg.trap{background:linear-gradient(165deg,#cf74a6,#973a70)}
+
+  .odm .frame{flex:1;display:flex;flex-direction:column;border:2px solid rgba(60,38,7,.7);border-radius:5px;padding:7px;gap:6px}
+  .odm .guilty .frame{background:#c8791f}
+  .odm .praise .frame{background:#5f95c8}
+  .odm .god .frame{background:#e3bf58}
+  .odm .trap .frame{background:#b8558e}
+
+  .odm .name{display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(60,38,7,.55);border-radius:3px;padding:5px 8px;gap:6px}
+  .odm .guilty .name{background:linear-gradient(#ecd097,#cfa662)}
+  .odm .praise .name{background:linear-gradient(#dcebf7,#a9cae8)}
+  .odm .god .name{background:linear-gradient(#fff2c4,#f0d275)}
+  .odm .trap .name{background:linear-gradient(#f0cbe0,#dca6c9)}
+  .odm .name h5{font-size:14.5px;font-weight:900;margin:0;letter-spacing:-.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .odm .attr{width:20px;height:20px;flex:none;border-radius:50%;color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.7)}
+  .odm .attr.yami{background:radial-gradient(#6a2e8f,#2a0f3f)}
+  .odm .attr.hikari{background:radial-gradient(#ffe28a,#e0a81e);color:#5a3d00}
+  .odm .attr.kami{background:radial-gradient(#ffd27a,#b8791a);color:#3a2200}
+  .odm .attr.trapicon{background:radial-gradient(#d76ab0,#7a2456)}
+
+  .odm .lv{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:1px;font-size:12px;color:#f0a81e;text-shadow:0 1px 0 #5c3200}
+  .odm .praise .lv{color:#ffe14d;text-shadow:0 1px 0 #244a70}
+
+  .odm .art{aspect-ratio:1/1;border:2px solid rgba(40,26,7,.85);background:radial-gradient(120% 90% at 50% 25%,#3a2a20,#160f0a);display:flex;align-items:center;justify-content:center}
+  .odm .art span{font-size:62px}
+  .odm .praise .art{background:radial-gradient(120% 90% at 50% 25%,#25405c,#0f2036)}
+  .odm .god .art{background:radial-gradient(120% 90% at 50% 25%,#4a3410,#1c1305)}
+
+  .odm .type{font-size:10px;font-weight:900;color:#241606;letter-spacing:-.02em}
+  .odm .praise .type{color:#0f2c48}
+  .odm .eff{background:#efe2c6;border:1px solid rgba(60,38,7,.5);border-radius:2px;padding:7px 8px;font-size:10px;line-height:1.5;color:#2a1a06;font-weight:600}
+  .odm .praise .eff{background:#e6eef6;color:#12304c}
+  .odm .god .eff{background:#f6ecc8}
+  .odm .trap .eff{background:#f3e0ec;color:#4a1638}
+
+  /* ── ステータス＝本物の数字（分かりやすさ最優先） ── */
+  .odm .stats{border-top:1.5px solid rgba(60,38,7,.45);padding-top:5px;margin-top:1px}
+  .odm .praise .stats{border-top-color:rgba(15,44,72,.4)}
+  .odm .statmain{display:flex;align-items:baseline;justify-content:space-between}
+  .odm .statmain .k{font-size:10px;font-weight:900;color:#5a3d10;letter-spacing:.02em}
+  .odm .praise .statmain .k{color:#154a76}
+  .odm .statmain .v{font-size:23px;font-weight:900;font-style:italic;color:#241606;font-variant-numeric:tabular-nums;line-height:1}
+  .odm .statmain .v i{font-size:11px;margin-left:2px;font-style:normal}
+  .odm .praise .statmain .v{color:#0f2c48}
+  .odm .statsub{display:flex;flex-wrap:wrap;gap:3px 10px;margin-top:5px;font-size:9.5px;font-weight:700;color:#3a2606}
+  .odm .praise .statsub{color:#173a5c}
+  .odm .statsub b{font-weight:900;font-variant-numeric:tabular-nums}
+
+  .odm .holo{position:absolute;inset:0;z-index:6;pointer-events:none;mix-blend-mode:overlay;opacity:0}
+  .odm .yg.r .holo{opacity:.5;background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.7) 46%,transparent 60%)}
+  .odm .yg.ur .holo{opacity:.9;background:linear-gradient(118deg,transparent 18%,rgba(255,255,255,.4) 34%,rgba(150,210,255,.6) 48%,rgba(255,205,110,.6) 62%,transparent 82%)}
+  .odm .rar{position:absolute;top:5px;left:5px;z-index:7;font-size:8.5px;font-weight:900;color:#fff;border-radius:4px;padding:2px 6px;letter-spacing:.06em}
+  .odm .rar.n{background:rgba(0,0,0,.55)}
+  .odm .rar.r{background:#2a6fb0}
+  .odm .rar.ur{background:linear-gradient(#ffd85a,#c68a12);color:#3a2600;box-shadow:0 0 8px rgba(255,200,60,.7)}
+
+  .odm .sys{margin-top:40px;border-top:1px solid var(--line);padding-top:22px}
+  .odm .sys h3{font-size:15px;font-weight:900;margin:0 0 8px}
+  .odm .sys p{font-size:13px;color:var(--ink2);line-height:1.75;margin:0}
+  .odm .sys p b{color:var(--ink)}
+  .odm .src{margin-top:22px;font-size:11.5px;color:var(--ink2);opacity:.85;line-height:1.7}
+</style>
+
+<div class="odm">
+<div class="wrap">
+  <div class="eyebrow">怒られカード · 数字を"本物"に</div>
+  <h1>カードの強さ＝<b>実カロリー</b>。</h1>
+  <p class="lede">「ATK+30%」みたいな架空の数値はやめ、<b>カロリー・体重換算・糖質・帳消し歩き分</b>の"本物で意味が分かる数字"に。カード枠・★・レア度・キャラは"集めたくなる"ために残す。数字は実用、見た目は遊び。</p>
+
+  <div class="grid">
+
+    <!-- 有罪 N -->
+    <div class="item">
+      <div class="yg guilty n">
+        <span class="rar n">N</span><div class="holo"></div>
+        <div class="frame">
+          <div class="name"><h5>締めのラーメン</h5><div class="attr yami">闇</div></div>
+          <div class="lv">★★★★★★</div>
+          <div class="art"><span>🍜</span></div>
+          <div class="type">【深夜族／悪魔族】</div>
+          <div class="eff">深夜24時の召喚は"現行犯"。鬼コーチが必ず起きる。「24時にラーメン…お前の胃袋、夜勤手当出てんの？」</div>
+          <div class="stats">
+            <div class="statmain"><span class="k">カロリー</span><span class="v">520<i>kcal</i></span></div>
+            <div class="statsub"><span>帳消し 歩き<b>47分</b>／走り<b>21分</b></span><span>体重換算(目安) <b>+0.07kg</b></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><div class="t">有罪 · 悪魔族/闇</div><div class="d">高カロリー・不摂生。<b>基本の"怒られ"</b>枠。</div></div>
+    </div>
+
+    <!-- 褒め R -->
+    <div class="item">
+      <div class="yg praise r">
+        <span class="rar r">R</span><div class="holo"></div>
+        <div class="frame">
+          <div class="name"><h5>サラダチキン</h5><div class="attr hikari">光</div></div>
+          <div class="lv">★★★★</div>
+          <div class="art"><span>🥗</span></div>
+          <div class="type">【賢者族／天使族】</div>
+          <div class="eff">賢い選択、成功。鬼コーチが照れながら認める。「お、ちゃんと選んだやん…どこで覚えた？」</div>
+          <div class="stats">
+            <div class="statmain"><span class="k">カロリー</span><span class="v">210<i>kcal</i></span></div>
+            <div class="statsub"><span>たんぱく質 <b>22g</b></span><span>痩せ貯金 <b>+300kcal</b></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><div class="t">頑張った · 天使族/光</div><div class="d">ヘルシー選択の<b>褒めカード</b>。怒られ⇄褒めのギャップ。</div></div>
+    </div>
+
+    <!-- 神 UR（1日カード）-->
+    <div class="item">
+      <div class="yg god ur">
+        <span class="rar ur">UR</span><div class="holo"></div>
+        <div class="frame">
+          <div class="name"><h5>完璧な一日</h5><div class="attr kami">神</div></div>
+          <div class="lv">★★★★★★★★★★★★</div>
+          <div class="art"><span>🏆</span></div>
+          <div class="type">【幻神族／降臨】</div>
+          <div class="eff">その日「摂取＜消費」を達成した時だけ手に入る。鬼コーチ、人生で数回の賛辞。「…完璧や。今日のお前は、神やった。」</div>
+          <div class="stats">
+            <div class="statmain"><span class="k">今日の収支</span><span class="v">−480<i>kcal</i></span></div>
+            <div class="statsub"><span>痩せ予測 <b>−0.1kg 前進</b></span><span>連続 <b>5日</b></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><div class="t">大勝利 · 神カード(UR)</div><div class="d">収支達成日だけの<b>ご褒美レア</b>。集めたくなる頂点。</div></div>
+    </div>
+
+    <!-- 有罪 R -->
+    <div class="item">
+      <div class="yg guilty r">
+        <span class="rar r">R</span><div class="holo"></div>
+        <div class="frame">
+          <div class="name"><h5>深夜のカキピー</h5><div class="attr yami">闇</div></div>
+          <div class="lv">★★★</div>
+          <div class="art"><span>🥜</span></div>
+          <div class="type">【背徳族／悪魔族】</div>
+          <div class="eff">キッチンで立ったまま召喚＝罪が重い。鬼コーチ「ジップ袋ごと持つな！せめて皿に出せ！」</div>
+          <div class="stats">
+            <div class="statmain"><span class="k">カロリー</span><span class="v">305<i>kcal</i></span></div>
+            <div class="statsub"><span>帳消し 歩き<b>28分</b>／走り<b>13分</b></span><span>体重換算(目安) <b>+0.04kg</b></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><div class="t">有罪 · レア(R)</div><div class="d">同じ有罪でも<b>キラ枠</b>。食材ごとに無限展開。</div></div>
+    </div>
+
+    <!-- 褒め N -->
+    <div class="item">
+      <div class="yg praise n">
+        <span class="rar n">N</span><div class="holo"></div>
+        <div class="frame">
+          <div class="name"><h5>朝のプロテイン</h5><div class="attr hikari">光</div></div>
+          <div class="lv">★★★</div>
+          <div class="art"><span>🥤</span></div>
+          <div class="type">【筋肉族／戦士族】</div>
+          <div class="eff">起きて30分以内の召喚はえらい。鬼コーチ「ええやん、続けろよ。三日で辞めんなよ？」</div>
+          <div class="stats">
+            <div class="statmain"><span class="k">カロリー</span><span class="v">180<i>kcal</i></span></div>
+            <div class="statsub"><span>たんぱく質 <b>20g</b></span><span>痩せ貯金 <b>+120kcal</b></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><div class="t">頑張った · ノーマル(N)</div><div class="d">地味な良習慣も<b>ちゃんとカード化</b>して継続を後押し。</div></div>
+    </div>
+
+    <!-- 罠 -->
+    <div class="item">
+      <div class="yg trap n">
+        <span class="rar n">N</span><div class="holo"></div>
+        <div class="frame">
+          <div class="name"><h5>ドカ食い衝動</h5><div class="attr trapicon">罠</div></div>
+          <div class="art"><span>🌀</span></div>
+          <div class="type">【通常罠】</div>
+          <div class="eff">食べる直前に発動。放置すると"痩せ貯金"が吹き飛ぶ。鬼コーチが割り込める。「深呼吸せえ。水飲め。10分待て。」</div>
+          <div class="stats">
+            <div class="statsub"><span>発動で 痩せ貯金 <b>−400kcal 相当</b></span><span>我慢で <b>回避＝ストリーク継続</b></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><div class="t">誘惑 · 罠カード</div><div class="d">食べる前の"衝動"も演出化。<b>踏みとどまる体験</b>もゲームに。</div></div>
+    </div>
+
+  </div>
+
+  <div class="sys">
+    <h3>数字は実用、見た目は遊び</h3>
+    <p><b>強さ＝実カロリー</b>（520kcal がそのまま"強さ"）。主指標は<b>カロリー＋運動換算（歩き/走り）＋★・レア度</b>、<b>体重換算は"目安"サブ</b>。運動換算(PACE)は研究で<b>「最も分かりやすく・目を引く」（理解41%／注目49%）</b>＝カードの主役に採用（ただし"痩せる効果"は断言しない）。褒めカードは<b>たんぱく質</b>を主役に。PFC詳細・微量栄養素は本体詳細で"ゆるい過不足"提示（Vision推定は誤差大）。<b>架空倍率(ATK+30%)は廃止</b>。※体重換算は7200kcal≒1kgのざっくり目安。</p>
+  </div>
+
+  <p class="src">※ 遊戯王等は雰囲気オマージュ（実ロゴ/フォント/枠素材/種族名は不使用・独自語に置換）。公開版は商標・意匠に触れない独自デザインに調整。</p>
+</div>
+</div>

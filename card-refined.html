@@ -1,0 +1,211 @@
+<meta charset="utf-8">
+<style>
+  .odm{
+    --bg:#17141a; --bg2:#221c26; --ink:#EFE7D6; --sub:#a89a86; --line:rgba(255,255,255,.08);
+    --accent:#D9422A;
+    --mincho:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP","YuMincho",serif;
+    --gothic:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",system-ui,sans-serif;
+    color:var(--ink);font-family:var(--gothic);line-height:1.5;-webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(70% 50% at 20% -10%,#3a2030 0,rgba(58,32,48,0) 55%),
+      radial-gradient(60% 50% at 100% 0%,#1f2740 0,rgba(31,39,64,0) 50%),
+      var(--bg);
+    padding:44px 22px 72px;min-height:100vh;
+  }
+  .odm *{box-sizing:border-box}
+  .odm .wrap{max-width:820px;margin:0 auto}
+  .odm .eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--gothic);font-size:11px;font-weight:800;letter-spacing:.24em;color:#e0a24a;text-transform:uppercase;margin-bottom:14px}
+  .odm .eyebrow::before{content:"";width:26px;height:1.5px;background:linear-gradient(90deg,#e0a24a,transparent)}
+  .odm h1{font-family:var(--mincho);font-size:clamp(26px,4.6vw,40px);font-weight:900;letter-spacing:.01em;margin:0 0 12px;text-wrap:balance}
+  .odm h1 b{color:#e0a24a}
+  .odm .lede{font-size:14.5px;color:var(--sub);max-width:60ch;margin:0}
+  .odm .lede b{color:var(--ink);font-weight:700}
+
+  .odm .stage{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:42px}
+  @media(max-width:620px){.odm .stage{grid-template-columns:1fr;max-width:340px;margin-inline:auto}}
+  .odm .slot{display:flex;flex-direction:column;gap:14px}
+  .odm .slot .cap{font-family:var(--gothic)}
+  .odm .slot .cap .t{font-size:14px;font-weight:800}
+  .odm .slot .cap .d{font-size:12px;color:var(--sub);line-height:1.6;margin-top:2px}
+  .odm .slot .cap .d b{color:var(--ink)}
+
+  /* ══════ TCG CARD ══════ */
+  .odm .tcg{container-type:inline-size;position:relative;width:100%;border-radius:15px;
+    padding:9px;display:flex;flex-direction:column;gap:6px;overflow:hidden;
+    background:linear-gradient(150deg,#e79235 0%,#a9560f 52%,#743509 100%);
+    border:1px solid #37190a;
+    box-shadow:0 26px 54px -22px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.4), inset 0 -3px 6px rgba(0,0,0,.4);}
+  .odm .tcg > *{position:relative;z-index:2}
+  .odm .grain{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:.10;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:150px}
+  .odm .foil{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;mix-blend-mode:color-dodge;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.5) 46%,transparent 62%)}
+  .odm .tcg.r .foil{opacity:.30}
+  .odm .tcg.ur .foil{opacity:.62;background-size:220% 100%;
+    background:linear-gradient(118deg,transparent 10%,rgba(120,200,255,.5) 28%,rgba(255,120,200,.42) 43%,rgba(150,255,180,.5) 57%,rgba(255,210,110,.55) 72%,transparent 90%);
+    animation:sheen 6s ease-in-out infinite}
+  @keyframes sheen{0%,100%{background-position:-40% 0}50%{background-position:140% 0}}
+  @media(prefers-reduced-motion:reduce){.odm .tcg.ur .foil{animation:none;background-position:60% 0}}
+
+  .odm .tbar{display:flex;align-items:center;justify-content:space-between;gap:8px;
+    background:linear-gradient(#f1d89c,#d3a75f);border:1px solid #6e4a1c;border-radius:6px;padding:5px 9px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 3px rgba(110,74,28,.4)}
+  .odm .cname{font-family:var(--mincho);font-weight:900;font-size:clamp(15px,6.2cqw,21px);color:#231205;
+    letter-spacing:-.01em;line-height:1.1;text-shadow:0 1px 0 rgba(255,255,255,.4);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .odm .medallion{width:9.5cqw;height:9.5cqw;min-width:24px;min-height:24px;border-radius:50%;flex:none;
+    display:grid;place-items:center;font-family:var(--mincho);font-weight:900;font-size:4.6cqw;color:#fff;
+    border:1.5px solid rgba(255,255,255,.75);
+    box-shadow:inset 0 2px 3px rgba(255,255,255,.45), inset 0 -3px 5px rgba(0,0,0,.5), 0 1px 2px rgba(0,0,0,.45)}
+  .odm .medallion.yami{background:radial-gradient(circle at 34% 28%,#8a49b4,#37134f)}
+  .odm .medallion.shinya{background:radial-gradient(circle at 34% 28%,#5a6fc4,#151e48)}
+  .odm .medallion.kami{background:radial-gradient(circle at 34% 28%,#ffe490,#b8791a);color:#3a2200}
+
+  .odm .pips{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:2px;padding:0 3px;min-height:14px}
+  .odm .pips i{font-style:normal;font-size:3.8cqw;line-height:1;color:#f6be34;filter:drop-shadow(0 1px 1px rgba(50,25,0,.6))}
+  .odm .god .pips i{color:#ffdf7a}
+
+  .odm .art{position:relative;border-radius:4px;overflow:hidden;aspect-ratio:1/0.8;
+    border:2px solid #2a1408;box-shadow:inset 0 3px 10px rgba(0,0,0,.6), 0 1px 0 rgba(255,255,255,.22)}
+  .odm .artimg{position:absolute;inset:0;display:grid;place-items:center;
+    background:radial-gradient(120% 100% at 50% 18%,#4a3428,#170f09)}
+  .odm .god .artimg{background:radial-gradient(120% 100% at 50% 18%,#2b2b56,#0e0e22)}
+  .odm .artimg span{font-size:26cqw;filter:drop-shadow(0 6px 12px rgba(0,0,0,.55))}
+  .odm .art::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 46px rgba(0,0,0,.6)}
+  .odm .setsym{position:absolute;top:5px;right:6px;z-index:2;width:5.6cqw;height:5.6cqw;min-width:18px;min-height:18px;border-radius:4px;
+    display:grid;place-items:center;font-family:var(--mincho);font-weight:900;font-size:3.4cqw;color:#fff;
+    background:linear-gradient(#c33726,#8a1f14);border:1px solid rgba(255,255,255,.5);box-shadow:0 1px 2px rgba(0,0,0,.55)}
+  .odm .god .setsym{background:linear-gradient(#e8c25a,#b8862a);color:#3a2600}
+  .odm .seal{position:absolute;bottom:7px;left:7px;z-index:2;transform:rotate(-9deg);
+    font-family:var(--mincho);font-weight:900;font-size:8cqw;letter-spacing:2px;color:#f4483a;
+    padding:2px 8px;border:2.5px solid #d9281c;border-radius:7px;background:rgba(20,0,0,.14);
+    text-shadow:0 0 8px rgba(230,40,30,.5);box-shadow:0 0 0 1px rgba(217,40,28,.25), 0 2px 5px rgba(0,0,0,.4)}
+  .odm .god .seal{color:#ffd85a;border-color:#e8c25a;text-shadow:0 0 12px rgba(232,194,90,.7);box-shadow:0 0 0 1px rgba(232,194,90,.3),0 2px 6px rgba(0,0,0,.4)}
+
+  .odm .ribbon{font-family:var(--gothic);font-weight:900;font-size:3.3cqw;color:#f2e8d2;
+    background:linear-gradient(#3a2410,#241606);border:1px solid #180d04;border-radius:3px;padding:4px 8px;
+    letter-spacing:.02em;box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
+    display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .odm .ribbon>span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .odm .god .ribbon{background:linear-gradient(#3a2f10,#241a06);color:#f5e8c0}
+  .odm .rage{display:flex;align-items:center;gap:4px;font-size:2.7cqw;font-weight:900;letter-spacing:.03em;color:#ffcabf;white-space:nowrap;flex:none}
+  .odm .rage .seg{display:flex;gap:2px}
+  .odm .rage .seg i{width:3.2cqw;height:2.1cqw;min-width:9px;border-radius:1px;background:rgba(255,255,255,.16)}
+  .odm .rage .seg i.on{background:linear-gradient(#ff7a52,#c81e14);box-shadow:0 0 4px rgba(255,70,30,.6)}
+  .odm .god .rage{color:#ffe4a6}
+  .odm .god .rage .seg i.on{background:linear-gradient(#ffdf7a,#c8951e);box-shadow:0 0 5px rgba(255,200,60,.6)}
+  .odm .feel{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;text-align:center;
+    font-family:var(--gothic);font-size:3cqw;font-weight:800;color:#3a2410;
+    background:linear-gradient(#f1d89c,#dcb972);border:1px solid #6e4a1c;border-radius:4px;padding:4px 8px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
+  .odm .feel b{font-variant-numeric:tabular-nums;font-weight:900;color:#7a1e10;font-size:3.8cqw;margin:0 1px}
+  .odm .god .feel{background:linear-gradient(#f4e6b4,#e3c877);border-color:#7a5a1c;color:#3a2a08}
+  .odm .god .feel b{color:#8a5a10}
+
+  .odm .text{flex:1;min-height:0;background:linear-gradient(#efe7d3,#e2d6ba);border:1px solid #7a5a28;border-radius:4px;
+    padding:7px 10px;box-shadow:inset 0 1px 4px rgba(120,90,40,.35)}
+  .odm .god .text{background:linear-gradient(#f6efd8,#e9debd);border-color:#8a6a28}
+  .odm .text p{font-family:var(--gothic);font-weight:600;font-size:3.5cqw;line-height:1.55;color:#2a1c0c;margin:0}
+
+  .odm .statbar{display:flex;align-items:center;justify-content:space-between;gap:8px;
+    background:linear-gradient(#241206,#180b03);border:1px solid #0e0602;border-radius:5px;padding:5px 10px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+  .odm .god .statbar{background:linear-gradient(#221805,#140e02)}
+  .odm .cal{display:flex;align-items:baseline;gap:5px}
+  .odm .cal .lab{font-family:var(--gothic);font-size:2.8cqw;font-weight:800;letter-spacing:.12em;color:#c9a36a}
+  .odm .cal .num{font-family:var(--gothic);font-weight:900;font-size:8.6cqw;font-variant-numeric:tabular-nums;line-height:.95;color:#fff}
+  .odm .cal .u{font-size:3cqw;color:#c9a36a;font-weight:700}
+  .odm .god .cal .num{color:#ffe9b0}
+  .odm .pace{display:flex;align-items:center;gap:4cqw;font-family:var(--gothic);font-size:3.1cqw;font-weight:800;color:#e8cfa0}
+  .odm .pace span{display:inline-flex;align-items:center;gap:3px}
+  .odm .pace svg{width:3.6cqw;height:3.6cqw;min-width:12px;min-height:12px;stroke:#e0b872;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .odm .pace b{font-variant-numeric:tabular-nums;color:#fff5e2;font-weight:900}
+  .odm .pace .lab{font-size:2.7cqw;font-weight:800;letter-spacing:.05em;color:#c9a36a}
+
+  .odm .fbar{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:0 3px;
+    font-family:var(--gothic);font-size:2.7cqw;font-weight:800;letter-spacing:.03em;color:#f4e2b6}
+  .odm .fbar .rare{color:#231205;background:linear-gradient(#f5d47c,#d9a53f);border-radius:3px;padding:1px 7px;
+    box-shadow:0 1px 2px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.6)}
+  .odm .tcg.ur .fbar .rare{background:linear-gradient(#fff0b0,#e8c25a);box-shadow:0 0 8px rgba(232,194,90,.7)}
+
+  .odm .note{margin-top:44px;border-top:1px solid var(--line);padding-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:8px 30px}
+  @media(max-width:620px){.odm .note{grid-template-columns:1fr}}
+  .odm .note h3{grid-column:1/-1;font-family:var(--mincho);font-size:15px;font-weight:900;margin:0 0 4px}
+  .odm .note div{font-size:12.5px;color:var(--sub);line-height:1.6}
+  .odm .note b{color:var(--ink)}
+</style>
+
+<div class="odm">
+<div class="wrap">
+  <div class="eyebrow">怒られカード · 洗練版</div>
+  <h1>本物の<b>一枚</b>にする。</h1>
+  <p class="lede">遊戯王の模造をやめ、<b>"怒り×鬼×和"</b>の独自TCGとして質感を上げました。多層ベベルの額縁・和紙グレイン・判定は<b>朱印(判子)</b>で独自化。R/URはホロ箔。まず有罪(R)と神(UR)の2枚で完成度を提示します。</p>
+
+  <div class="stage">
+
+    <!-- 有罪 R -->
+    <div class="slot">
+      <article class="tcg guilty r">
+        <div class="foil"></div><div class="grain"></div>
+        <header class="tbar">
+          <h3 class="cname">締めのラーメン</h3>
+          <span class="medallion shinya">深</span>
+        </header>
+        <div class="pips"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div>
+        <figure class="art">
+          <div class="artimg"><span>🍜</span></div>
+          <span class="setsym">怒</span>
+          <span class="seal">有罪</span>
+        </figure>
+        <div class="ribbon"><span>麺類 ・ こってり系 ・ 深夜</span><span class="rage">デブ度<span class="seg"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span></div>
+        <div class="text"><p>深夜24時の召喚は"現行犯"。鬼コーチが必ず起きる。「24時にラーメン…お前の胃袋、夜勤手当出てんの？」</p></div>
+        <div class="statbar">
+          <div class="cal"><span class="lab">カロリー</span><span class="num">520</span><span class="u">kcal</span></div>
+          <div class="pace">
+            <span><span class="lab">徒歩</span> <b>47</b>分</span>
+            <span><span class="lab">ラン</span> <b>21</b>分</span>
+          </div>
+        </div>
+        <div class="feel"><span>🍬 角砂糖 <b>17</b>個分</span><span>🍚 ごはん <b>2.2</b>杯分</span></div>
+        <footer class="fbar"><span>NO.041 · 深夜シリーズ</span><span>体重換算(目安) +0.07kg</span><span class="rare">R</span></footer>
+      </article>
+      <div class="cap"><div class="t">有罪 · 悪魔族/闇（R）</div><div class="d">額縁の質感・朱印の"有罪"・カロリーを主役にしたステータスバー。<b>基本の一枚が"本物"に</b>。</div></div>
+    </div>
+
+    <!-- 神 UR -->
+    <div class="slot">
+      <article class="tcg god ur">
+        <div class="foil"></div><div class="grain"></div>
+        <header class="tbar">
+          <h3 class="cname">完璧な一日</h3>
+          <span class="medallion kami">王</span>
+        </header>
+        <div class="pips"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div>
+        <figure class="art">
+          <div class="artimg"><span>🏆</span></div>
+          <span class="setsym">怒</span>
+          <span class="seal">神</span>
+        </figure>
+        <div class="ribbon"><span>一日 ・ 達成の証</span><span class="rage">完璧度<span class="seg"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span></div>
+        <div class="text"><p>その日「摂取＜消費」を達成した時だけ手に入る。鬼コーチ、人生で数回の賛辞。「…完璧や。今日のお前は、神やった。」</p></div>
+        <div class="statbar">
+          <div class="cal"><span class="lab">今日の収支</span><span class="num">−480</span><span class="u">kcal</span></div>
+          <div class="pace"><span>痩せ予測 <b>−0.1kg</b>前進</span></div>
+        </div>
+        <div class="feel"><span>🍚 ごはん <b>2</b>杯分を消費で勝ち越し</span></div>
+        <footer class="fbar"><span>NO.000 · 神シリーズ</span><span>連続 5日達成</span><span class="rare">UR</span></footer>
+      </article>
+      <div class="cap"><div class="t">大勝利 · 神カード（UR）</div><div class="d">金の額縁＋<b>虹のホロ箔（微光沢アニメ）</b>で最上位の特別感。収支達成日だけの"引きたくなる"ご褒美。</div></div>
+    </div>
+
+  </div>
+
+  <div class="note">
+    <h3>何を洗練したか</h3>
+    <div><b>額縁</b>：フラットな一色→多層ベベル（内側ハイライト＋外側の影）で立体感。<br><b>判定</b>：スタンプ文字→<b>朱印(判子)</b>モチーフで和＆独自化（商標も回避）。</div>
+    <div><b>書体</b>：カード名・判定を明朝、効果文をゴシック、数値をtabularで階層化。<br><b>質感</b>：和紙グレイン＋アート窓のヴィネット。R/URは<b>ホロ箔</b>（URのみ微光沢アニメ・reduced-motion配慮）。</div>
+    <div><b>指標</b>：カロリーを主役に、運動換算は歩き/走りのピクトで。体重換算はフッターに"目安"表記。</div>
+    <div><b>独自性</b>：「怒」の刻印・鬼/闇の世界観で、遊戯王の模造でなく<b>自分のTCG</b>に。</div>
+  </div>
+</div>
+</div>

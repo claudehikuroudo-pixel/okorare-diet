@@ -1,0 +1,198 @@
+<style>
+  .odm{
+    --paper:#F5F4F1; --ink:#1A1613; --ink2:#726A61; --line:#EAE7E2;
+    --accent:#E4022B; --p5red:#E4022B; --p5ink:#0B0B0C;
+    --fdisp:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+    color:var(--ink);font-family:var(--fdisp);line-height:1.5;-webkit-font-smoothing:antialiased;
+    background:radial-gradient(90% 60% at 12% -8%,#fbe3e3 0,rgba(251,227,227,0) 42%),var(--paper);
+    padding:40px 20px 72px;min-height:100vh;
+  }
+  .odm *{box-sizing:border-box}
+  .odm .wrap{max-width:1180px;margin:0 auto}
+  .odm .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin-bottom:12px}
+  .odm .eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);border-radius:2px}
+  .odm h1{font-size:clamp(26px,4vw,40px);font-weight:900;letter-spacing:-.02em;margin:0 0 12px}
+  .odm h1 b{color:var(--accent)}
+  .odm .lede{font-size:15px;color:var(--ink2);max-width:62ch;margin:0}
+  .odm .lede b{color:var(--ink);font-weight:700}
+
+  .odm .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:28px;margin-top:38px}
+  .odm .item{display:flex;flex-direction:column;gap:13px}
+  .odm .cap .n{font-size:11px;font-weight:900;letter-spacing:.08em;color:var(--accent)}
+  .odm .cap .t{font-size:15px;font-weight:800;margin-top:2px}
+  .odm .cap .d{font-size:12px;color:var(--ink2);line-height:1.55;margin-top:3px}
+  .odm .cap .d b{color:var(--ink)}
+
+  .odm .card{position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;font-family:var(--fdisp);box-shadow:0 20px 40px -18px rgba(20,12,8,.45)}
+
+  /* ── P5 ── */
+  .odm .p5{background:var(--p5ink);color:#f7f5f2;display:flex;flex-direction:column}
+  .odm .p5 .red{position:absolute;top:-6%;left:-6%;right:-6%;height:68%;background:var(--p5red);clip-path:polygon(0 0,100% 0,100% 76%,0 97%);z-index:0}
+  .odm .p5 .dots{position:absolute;inset:0;z-index:0;opacity:.15;background-image:radial-gradient(#000 1.1px,transparent 1.5px);background-size:7px 7px}
+  .odm .p5 .star{position:absolute;top:10px;right:12px;width:28px;height:28px;z-index:3;color:#fff;transform:rotate(12deg)}
+  .odm .p5 .pad{position:relative;z-index:2;padding:14px 15px 0;display:flex;flex-direction:column;height:100%}
+  .odm .p5 .kick{font-size:9.5px;font-weight:900;letter-spacing:.2em;color:var(--p5ink)}
+  .odm .p5 .verdict{display:flex;align-items:baseline;gap:8px;transform:skewX(-6deg);margin-top:1px}
+  .odm .p5 .verdict em{font-style:italic;font-weight:900;font-size:52px;line-height:.85;letter-spacing:2px;color:#f7f5f2;-webkit-text-stroke:2.4px var(--p5ink);paint-order:stroke fill}
+  .odm .p5 .verdict b{font-style:italic;font-weight:900;font-size:12px;letter-spacing:.14em;color:var(--p5ink)}
+  .odm .p5 .mid{display:flex;gap:11px;padding-top:9px;align-items:flex-start}
+  .odm .p5 .photo{width:86px;height:86px;flex:none;border-radius:3px;border:3px solid #f7f5f2;overflow:hidden;transform:skewY(-4deg) rotate(-2deg);box-shadow:4px 5px 0 var(--p5ink);background:radial-gradient(120% 90% at 50% 25%,#3a2a20,#160f0a);display:flex;align-items:center;justify-content:center}
+  .odm .p5 .photo span{font-size:42px;transform:skewY(4deg)}
+  .odm .p5 .food{font-size:15px;font-weight:900;font-style:italic;transform:skewX(-4deg)}
+  .odm .p5 .cal{font-size:24px;font-weight:900;font-style:italic;line-height:1;margin-top:6px;font-variant-numeric:tabular-nums}
+  .odm .p5 .cal i{font-size:11px;margin-left:2px;opacity:.9}
+  .odm .p5 .tag{align-self:flex-start;background:var(--p5ink);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;transform:skewX(-10deg);margin-top:7px}
+  .odm .p5 .tag em{font-style:italic}
+  .odm .p5 .quote{position:relative;z-index:2;margin-top:auto;display:flex;gap:8px;align-items:center;padding:10px 13px;background:var(--p5ink);border-top:3px solid var(--p5red);font-size:11px;font-weight:700;line-height:1.5;color:#f2efe9}
+  .odm .p5 .quote .oh{width:30px;height:30px;flex:none}
+  .odm .p5 .info{padding-top:5px;min-width:0}
+
+  /* ── 遊戯王 ── */
+  .odm .yg{background:linear-gradient(165deg,#dca961,#b06f2c);padding:8px;display:flex;flex-direction:column;color:#1a1206}
+  .odm .yg .frame{flex:1;display:flex;flex-direction:column;border:2px solid #6b4415;border-radius:4px;background:#c88b3a;padding:6px;gap:5px;min-height:0}
+  .odm .yg .name{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(#ecd097,#cfa662);border:1px solid #8a5f22;border-radius:3px;padding:4px 8px}
+  .odm .yg .name h5{font-size:14px;font-weight:900;margin:0;letter-spacing:-.03em}
+  .odm .yg .attr{width:20px;height:20px;flex:none;border-radius:50%;background:radial-gradient(#6a2e8f,#2a0f3f);color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;border:1px solid #e0c680}
+  .odm .yg .lv{display:flex;justify-content:flex-end;gap:1px;font-size:11px;color:#f0a81e;text-shadow:0 1px 0 #5c3200;letter-spacing:1px}
+  .odm .yg .art{aspect-ratio:1/1;border:2px solid #3a2607;background:radial-gradient(120% 90% at 50% 25%,#3a2a20,#160f0a);display:flex;align-items:center;justify-content:center}
+  .odm .yg .art span{font-size:58px}
+  .odm .yg .type{font-size:9.5px;font-weight:900;color:#241606;letter-spacing:-.02em}
+  .odm .yg .eff{flex:1;background:#efe2c6;border:1px solid #8a5f22;border-radius:2px;padding:6px 7px;font-size:9.5px;line-height:1.45;color:#2a1a06;font-weight:600;min-height:0;overflow:hidden}
+  .odm .yg .atk{display:flex;justify-content:flex-end;gap:12px;font-size:12px;font-weight:900;color:#241606;font-variant-numeric:tabular-nums}
+
+  /* ── スカウター ── */
+  .odm .sc{background:#05100a;color:#7CFF9E;padding:14px}
+  .odm .sc::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(60,255,140,.06) 0 1px,transparent 1px 3px)}
+  .odm .sc .lens{position:absolute;inset:0;z-index:0;background:radial-gradient(120% 90% at 60% 38%,rgba(60,255,140,.12),transparent 60%)}
+  .odm .sc .z{position:relative;z-index:2;display:flex;flex-direction:column;height:100%}
+  .odm .sc .top{font-size:9px;font-weight:800;letter-spacing:.2em;color:#3dff88;display:flex;justify-content:space-between;opacity:.88}
+  .odm .sc .reticle{flex:1;position:relative;display:flex;align-items:center;justify-content:center;margin:6px 0}
+  .odm .sc .rimg{width:56%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;filter:hue-rotate(55deg) saturate(.45) brightness(.95)}
+  .odm .sc .rimg span{font-size:60px}
+  .odm .sc .corner{position:absolute;width:22px;height:22px;border:2px solid #3dff88}
+  .odm .sc .tl{top:0;left:6%;border-right:0;border-bottom:0}
+  .odm .sc .tr{top:0;right:6%;border-left:0;border-bottom:0}
+  .odm .sc .bl{bottom:0;left:6%;border-right:0;border-top:0}
+  .odm .sc .br{bottom:0;right:6%;border-left:0;border-top:0}
+  .odm .sc .plabel{font-size:9px;font-weight:800;letter-spacing:.18em;color:#3dff88;opacity:.8;text-align:center}
+  .odm .sc .pnum{font-size:50px;font-weight:900;font-style:italic;color:#6bff9a;text-shadow:0 0 14px rgba(60,255,140,.6);line-height:1;font-variant-numeric:tabular-nums;text-align:center}
+  .odm .sc .pnum b{font-size:15px;color:#ff5b52;margin-left:2px}
+  .odm .sc .quote{font-size:11px;font-weight:800;color:#c6ffd8;text-align:center;margin-top:8px;line-height:1.5}
+
+  /* ── 格ゲー K.O. ── */
+  .odm .ko{background:radial-gradient(120% 90% at 50% 32%,#2a1030,#0a0510);color:#fff;padding:12px;display:flex;flex-direction:column}
+  .odm .ko .hpwrap{display:flex;flex-direction:column;gap:5px;position:relative;z-index:2}
+  .odm .ko .hp{display:flex;align-items:center;gap:6px}
+  .odm .ko .hp .nm{font-size:8.5px;font-weight:900;width:56px;letter-spacing:.01em}
+  .odm .ko .hp .bar{flex:1;height:9px;background:#3a2020;border:1px solid #000;overflow:hidden;transform:skewX(-18deg)}
+  .odm .ko .hp .bar i{display:block;height:100%}
+  .odm .ko .mid{flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .odm .ko .burst{position:absolute;width:180%;height:180%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,210,30,.16) 0 5deg,transparent 5deg 11deg)}
+  .odm .ko .kobig{position:relative;font-style:italic;font-weight:900;font-size:64px;line-height:.82;color:#ffd21e;-webkit-text-stroke:3px #7a0000;paint-order:stroke fill;transform:skewX(-8deg);text-shadow:4px 5px 0 rgba(0,0,0,.5)}
+  .odm .ko .lose{position:relative;z-index:2;text-align:center;font-size:13px;font-weight:900;font-style:italic;color:#ff5b52;letter-spacing:.06em;margin-top:2px}
+  .odm .ko .quote{position:relative;z-index:2;font-size:11px;font-weight:800;color:#ffd9a8;text-align:center;margin-top:8px;line-height:1.5}
+
+  .odm .foot{margin-top:40px;border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:var(--ink2);line-height:1.7}
+  .odm .foot b{color:var(--ink)}
+</style>
+
+<div class="odm">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="oni" viewBox="0 0 60 60">
+    <path d="M17 15 Q13 3 21 6 Q23 11 25 16 Z" fill="#F3E4C6" stroke="#c9a763" stroke-width="1"/>
+    <path d="M43 15 Q47 3 39 6 Q37 11 35 16 Z" fill="#F3E4C6" stroke="#c9a763" stroke-width="1"/>
+    <path d="M30 9 C45 9 51 21 51 33 C51 47 42 55 30 55 C18 55 9 47 9 33 C9 21 15 9 30 9 Z" fill="#DA4034"/>
+    <rect x="8" y="21" width="44" height="8" rx="1" fill="#fff"/>
+    <circle cx="30" cy="25" r="4" fill="#DA4034"/>
+    <path d="M17 35 L27 38" stroke="#3a0f0a" stroke-width="3.6" stroke-linecap="round"/>
+    <path d="M43 35 L33 38" stroke="#3a0f0a" stroke-width="3.6" stroke-linecap="round"/>
+    <circle cx="23" cy="41" r="3.2" fill="#fff"/><circle cx="23.6" cy="41.4" r="1.7" fill="#160000"/>
+    <circle cx="37" cy="41" r="3.2" fill="#fff"/><circle cx="36.4" cy="41.4" r="1.7" fill="#160000"/>
+    <path d="M23 49 Q30 45 37 49" stroke="#3a0f0a" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+    <path d="M27 47.5 L28.5 51.5 L30 47.5 Z" fill="#fff"/>
+  </symbol>
+  <symbol id="star" viewBox="0 0 24 24"><path d="M12 1l2.9 7.3L22 9l-5.5 4.6L18.4 21 12 16.9 5.6 21l1.9-7.4L2 9l7.1-.7z" fill="currentColor"/></symbol>
+</svg>
+
+<div class="wrap">
+  <div class="eyebrow">怒られカード · 演出4種 比較</div>
+  <h1>どの<b>アニメ/ゲーム演出</b>でいく？</h1>
+  <p class="lede">全部おなじ食事（<b>締めのラーメン・520kcal・深夜24:41</b>）で揃えた"怒られカード"。撮った瞬間＝そのままシェアの1枚。世界観の違いを直接見比べてください。</p>
+
+  <div class="grid">
+
+    <!-- ペルソナ5 -->
+    <div class="item">
+      <div class="card p5">
+        <div class="red"></div><div class="dots"></div>
+        <svg class="star"><use href="#star"/></svg>
+        <div class="pad">
+          <div class="kick">RESULT ── 深夜 24:41</div>
+          <div class="verdict"><em>有罪</em><b>GUILTY</b></div>
+          <div class="mid">
+            <div class="photo"><span>🍜</span></div>
+            <div class="info"><div class="food">締めのラーメン</div><div class="cal">520<i>kcal</i></div><div class="tag">歩き <em>47分</em></div></div>
+          </div>
+        </div>
+        <div class="quote"><svg class="oh"><use href="#oni"/></svg><span>「今 何時やと思てんの。」</span></div>
+      </div>
+      <div class="cap"><div class="n">① ペルソナ5風</div><div class="t">スタイリッシュ結果画面</div><div class="d">赤×黒でとにかく<b>オシャレ・SNS映え最強</b>。怒られ/毒舌のトーンと相性◎（前回の本命）。</div></div>
+    </div>
+
+    <!-- 遊戯王 -->
+    <div class="item">
+      <div class="card yg">
+        <div class="frame">
+          <div class="name"><h5>締めのラーメン</h5><div class="attr">闇</div></div>
+          <div class="lv">★★★★★★</div>
+          <div class="art"><span>🍜</span></div>
+          <div class="type">【深夜族／悪魔族】</div>
+          <div class="eff">深夜24時にこのカードを召喚に成功した場合、「鬼コーチ」の効果が必ず発動する。「今 何時やと思てんの。」自分は"歩き47分"ぶんのダメージを受ける。</div>
+          <div class="atk"><span>ATK/520</span><span>DEF/68</span></div>
+        </div>
+      </div>
+      <div class="cap"><div class="n">② 遊戯王風</div><div class="t">モンスターカード化</div><div class="d">kcal＝ATK、糖質＝DEF、★＝ギルティ度。<b>"カード"そのもの＝集める楽しさ・ガチャ課金</b>に直結。即認知。</div></div>
+    </div>
+
+    <!-- スカウター -->
+    <div class="item">
+      <div class="card sc">
+        <div class="lens"></div>
+        <div class="z">
+          <div class="top"><span>SCAN…</span><span>深夜 24:41</span></div>
+          <div class="reticle">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <div class="rimg"><span>🍜</span></div>
+          </div>
+          <div class="plabel">推定カロリー / POWER LEVEL</div>
+          <div class="pnum">520<b>▲</b></div>
+          <div class="quote">「このラーメン…カロリー520だと！？<br>バカな、深夜にこの数値…！」</div>
+        </div>
+      </div>
+      <div class="cap"><div class="n">③ ドラゴンボール スカウター風</div><div class="t">カロリー"戦闘力"計測</div><div class="d">緑のHUDで数値がバーン。<b>「◯◯だと！？」はミームの鉄板</b>。数値インパクトが強く、笑いで拡散。</div></div>
+    </div>
+
+    <!-- K.O. -->
+    <div class="item">
+      <div class="card ko">
+        <div class="hpwrap">
+          <div class="hp"><span class="nm">拓也</span><div class="bar"><i style="width:8%;background:linear-gradient(#ff5b52,#c8001e)"></i></div></div>
+          <div class="hp"><span class="nm">締めラーメン</span><div class="bar"><i style="width:100%;background:linear-gradient(#ffe14d,#f5a524)"></i></div></div>
+        </div>
+        <div class="mid">
+          <div class="burst"></div>
+          <div class="kobig">K.O.</div>
+        </div>
+        <div class="lose">YOU LOSE ── 深夜の締めに敗北</div>
+        <div class="quote">「また負けたんか…。<br>意志の体力ゲージ、0や。」— 鬼コーチ</div>
+      </div>
+      <div class="cap"><div class="n">④ 格ゲー K.O.風</div><div class="t">対戦・敗北演出</div><div class="d">体力ゲージ＋「K.O./YOU LOSE」。<b>一瞬で伝わる・即バズ</b>。褒め時は「PERFECT / YOU WIN」に。</div></div>
+    </div>
+
+  </div>
+
+  <div class="foot">
+    4演出とも「撮った瞬間＝シェアの1枚」。<b>拡散力</b>なら③スカウター（笑い）or ④K.O.（一撃）、<b>オシャレ</b>なら①P5、<b>コレクション/課金</b>まで狙うなら②遊戯王。<br>気に入った番号（複数OK）と方向を教えてください。決めた演出で本体モックに統合し、PoC実働版に進みます。
+  </div>
+</div>
+</div>

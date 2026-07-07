@@ -1,0 +1,278 @@
+<meta charset="utf-8">
+<style>
+  .odm{
+    --bg:#17141a; --ink:#EFE7D6; --sub:#a89a86; --line:rgba(255,255,255,.08);
+    --mincho:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP","YuMincho",serif;
+    --gothic:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",system-ui,sans-serif;
+    color:var(--ink);font-family:var(--gothic);line-height:1.5;-webkit-font-smoothing:antialiased;
+    background:radial-gradient(70% 50% at 18% -10%,#3a2030 0,rgba(58,32,48,0) 55%),
+      radial-gradient(60% 50% at 100% 0%,#1f2740 0,rgba(31,39,64,0) 50%),var(--bg);
+    padding:44px 22px 72px;min-height:100vh;
+  }
+  .odm *{box-sizing:border-box}
+  .odm .wrap{max-width:1120px;margin:0 auto}
+  .odm .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:800;letter-spacing:.24em;color:#e0a24a;text-transform:uppercase;margin-bottom:14px}
+  .odm .eyebrow::before{content:"";width:26px;height:1.5px;background:linear-gradient(90deg,#e0a24a,transparent)}
+  .odm h1{font-family:var(--mincho);font-size:clamp(26px,4.6vw,40px);font-weight:900;margin:0 0 12px;text-wrap:balance}
+  .odm h1 b{color:#e0a24a}
+  .odm .lede{font-size:14.5px;color:var(--sub);max-width:62ch;margin:0}
+  .odm .lede b{color:var(--ink);font-weight:700}
+
+  .odm .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:30px;margin-top:42px;align-items:start}
+  .odm .slot{display:flex;flex-direction:column;gap:12px}
+  .odm .slot .cap{font-size:12px;color:var(--sub);line-height:1.55}
+  .odm .slot .cap b{color:var(--ink);font-weight:800}
+
+  /* ══════ TCG CARD ══════ */
+  .odm .tcg{container-type:inline-size;position:relative;width:100%;border-radius:15px;padding:9px;
+    display:flex;flex-direction:column;gap:6px;overflow:hidden;
+    background:linear-gradient(150deg,#e79235 0%,#a9560f 52%,#743509 100%);border:1px solid #37190a;
+    box-shadow:0 26px 54px -22px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.4), inset 0 -3px 6px rgba(0,0,0,.4)}
+  .odm .tcg > *{position:relative;z-index:2}
+  .odm .grain{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:.10;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:150px}
+  .odm .foil{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;mix-blend-mode:color-dodge;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.5) 46%,transparent 62%)}
+  .odm .tcg.r .foil{opacity:.30}
+  .odm .tcg.ur .foil{opacity:.62;background-size:220% 100%;
+    background:linear-gradient(118deg,transparent 10%,rgba(120,200,255,.5) 28%,rgba(255,120,200,.42) 43%,rgba(150,255,180,.5) 57%,rgba(255,210,110,.55) 72%,transparent 90%);
+    animation:sheen 6s ease-in-out infinite}
+  @keyframes sheen{0%,100%{background-position:-40% 0}50%{background-position:140% 0}}
+  @media(prefers-reduced-motion:reduce){.odm .tcg.ur .foil{animation:none;background-position:60% 0}}
+
+  .odm .tbar{display:flex;align-items:center;justify-content:space-between;gap:8px;
+    background:linear-gradient(#f1d89c,#d3a75f);border:1px solid #6e4a1c;border-radius:6px;padding:5px 9px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 3px rgba(110,74,28,.4)}
+  .odm .cname{font-family:var(--mincho);font-weight:900;font-size:clamp(15px,6.2cqw,21px);color:#231205;
+    line-height:1.1;text-shadow:0 1px 0 rgba(255,255,255,.4);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .odm .medallion{width:9.5cqw;height:9.5cqw;min-width:24px;min-height:24px;border-radius:50%;flex:none;
+    display:grid;place-items:center;font-family:var(--mincho);font-weight:900;font-size:4.6cqw;color:#fff;
+    border:1.5px solid rgba(255,255,255,.75);
+    box-shadow:inset 0 2px 3px rgba(255,255,255,.45), inset 0 -3px 5px rgba(0,0,0,.5), 0 1px 2px rgba(0,0,0,.45)}
+  .odm .medallion.shinya{background:radial-gradient(circle at 34% 28%,#5a6fc4,#151e48)}
+  .odm .medallion.asa{background:radial-gradient(circle at 34% 28%,#a9d8ff,#2f6aa0)}
+  .odm .medallion.hiru{background:radial-gradient(circle at 34% 28%,#ffe58a,#d1a01e);color:#3a2a00}
+  .odm .medallion.yoru{background:radial-gradient(circle at 34% 28%,#a06be0,#3a1a5a)}
+  .odm .medallion.wana{background:radial-gradient(circle at 34% 28%,#e06ab0,#7a2456)}
+  .odm .medallion.kami{background:radial-gradient(circle at 34% 28%,#ffe490,#b8791a);color:#3a2200}
+
+  .odm .pips{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:2px;padding:0 3px;min-height:14px}
+  .odm .pips i{font-style:normal;font-size:3.8cqw;line-height:1;color:#f6be34;filter:drop-shadow(0 1px 1px rgba(50,25,0,.6))}
+
+  .odm .art{position:relative;border-radius:4px;overflow:hidden;aspect-ratio:1/0.78;
+    border:2px solid #2a1408;box-shadow:inset 0 3px 10px rgba(0,0,0,.6), 0 1px 0 rgba(255,255,255,.22)}
+  .odm .artimg{position:absolute;inset:0;display:grid;place-items:center;
+    background:radial-gradient(120% 100% at 50% 18%,#4a3428,#170f09)}
+  .odm .artimg span{font-size:26cqw;filter:drop-shadow(0 6px 12px rgba(0,0,0,.55))}
+  .odm .art::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 46px rgba(0,0,0,.6)}
+  .odm .setsym{position:absolute;top:5px;right:6px;z-index:2;width:5.6cqw;height:5.6cqw;min-width:18px;min-height:18px;border-radius:4px;
+    display:grid;place-items:center;font-family:var(--mincho);font-weight:900;font-size:3.4cqw;color:#fff;
+    background:linear-gradient(#c33726,#8a1f14);border:1px solid rgba(255,255,255,.5);box-shadow:0 1px 2px rgba(0,0,0,.55)}
+  .odm .seal{position:absolute;bottom:7px;left:7px;z-index:2;transform:rotate(-9deg);
+    font-family:var(--mincho);font-weight:900;font-size:8cqw;letter-spacing:2px;color:#f4483a;
+    padding:2px 8px;border:2.5px solid #d9281c;border-radius:7px;background:rgba(20,0,0,.14);
+    text-shadow:0 0 8px rgba(230,40,30,.5);box-shadow:0 0 0 1px rgba(217,40,28,.25), 0 2px 5px rgba(0,0,0,.4)}
+
+  .odm .ribbon{font-family:var(--gothic);font-weight:900;font-size:3.3cqw;color:#f2e8d2;
+    background:linear-gradient(#3a2410,#241606);border:1px solid #180d04;border-radius:3px;padding:4px 8px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12);display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .odm .ribbon>span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .odm .rage{display:flex;align-items:center;gap:4px;font-size:2.7cqw;font-weight:900;letter-spacing:.03em;color:#ffcabf;white-space:nowrap;flex:none}
+  .odm .rage .seg{display:flex;gap:2px}
+  .odm .rage .seg i{width:3.2cqw;height:2.1cqw;min-width:9px;border-radius:1px;background:rgba(255,255,255,.16)}
+  .odm .rage .seg i.on{background:linear-gradient(#ff7a52,#c81e14);box-shadow:0 0 4px rgba(255,70,30,.6)}
+
+  .odm .text{background:linear-gradient(#efe7d3,#e2d6ba);border:1px solid #7a5a28;border-radius:4px;padding:7px 10px;
+    box-shadow:inset 0 1px 4px rgba(120,90,40,.35)}
+  .odm .text p{font-family:var(--gothic);font-weight:600;font-size:3.5cqw;line-height:1.55;color:#2a1c0c;margin:0}
+
+  .odm .statbar{display:flex;align-items:center;justify-content:space-between;gap:8px;
+    background:linear-gradient(#241206,#180b03);border:1px solid #0e0602;border-radius:5px;padding:5px 10px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+  .odm .cal{display:flex;align-items:baseline;gap:5px;min-width:0}
+  .odm .cal .clab{font-family:var(--gothic);font-size:2.8cqw;font-weight:800;letter-spacing:.1em;color:#c9a36a;white-space:nowrap}
+  .odm .cal .num{font-family:var(--gothic);font-weight:900;font-size:8.2cqw;font-variant-numeric:tabular-nums;line-height:.95;color:#fff}
+  .odm .cal .u{font-size:3cqw;color:#c9a36a;font-weight:700}
+  .odm .pace{display:flex;align-items:center;gap:3.4cqw;font-family:var(--gothic);font-size:3cqw;font-weight:800;color:#e8cfa0;white-space:nowrap}
+  .odm .pace .lab{font-size:2.6cqw;font-weight:800;letter-spacing:.04em;color:#c9a36a}
+  .odm .pace b{font-variant-numeric:tabular-nums;color:#fff5e2;font-weight:900}
+
+  .odm .feel{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;text-align:center;
+    font-family:var(--gothic);font-size:3cqw;font-weight:800;color:#3a2410;
+    background:linear-gradient(#f1d89c,#dcb972);border:1px solid #6e4a1c;border-radius:4px;padding:4px 8px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
+  .odm .feel b{font-variant-numeric:tabular-nums;font-weight:900;color:#7a1e10;font-size:3.7cqw;margin:0 1px}
+
+  .odm .fbar{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:0 3px;
+    font-family:var(--gothic);font-size:2.7cqw;font-weight:800;letter-spacing:.03em;color:#f4e2b6}
+  .odm .fbar .rare{border-radius:3px;padding:1px 7px;box-shadow:0 1px 2px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.5)}
+  .odm .fbar .rare.n{background:linear-gradient(#e6e0d2,#b8b0a0);color:#2a2018}
+  .odm .fbar .rare.r{background:linear-gradient(#c2dcf4,#6f9fd0);color:#132a44}
+  .odm .fbar .rare.ur{background:linear-gradient(#fff0b0,#e8c25a);color:#231205;box-shadow:0 0 8px rgba(232,194,90,.7)}
+
+  /* ── 褒め（緑・光） ── */
+  .odm .praise{background:linear-gradient(150deg,#46a08c,#1f6f63 55%,#124a44);border-color:#0d3a34}
+  .odm .praise .tbar{background:linear-gradient(#dff0ea,#a8d6cb);border-color:#1f6f5c}
+  .odm .praise .cname{color:#0d3a30}
+  .odm .praise .artimg{background:radial-gradient(120% 100% at 50% 18%,#1f4a44,#0a1f1b)}
+  .odm .praise .ribbon{background:linear-gradient(#123a33,#0b241f);color:#e2f2ec}
+  .odm .praise .text{background:linear-gradient(#eef6f0,#dbeae1);border-color:#2f6f5f}
+  .odm .praise .text p{color:#123028}
+  .odm .praise .statbar{background:linear-gradient(#0f2b26,#071815)}
+  .odm .praise .cal .num{color:#eafff6}
+  .odm .praise .seal{color:#3ad07f;border-color:#2fb06a;text-shadow:0 0 8px rgba(50,200,120,.5);box-shadow:0 0 0 1px rgba(47,176,106,.25),0 2px 5px rgba(0,0,0,.4)}
+  .odm .praise .rage{color:#bff0d6}
+  .odm .praise .rage .seg i.on{background:linear-gradient(#5fe0a0,#1f9f66);box-shadow:0 0 4px rgba(60,220,140,.6)}
+  .odm .praise .feel{background:linear-gradient(#dff0ea,#bfe0d4);border-color:#1f6f5c;color:#0d3a30}
+  .odm .praise .feel b{color:#127a4a}
+  .odm .praise .fbar{color:#d6f0e6}
+
+  /* ── 罠（マゼンタ） ── */
+  .odm .trap{background:linear-gradient(150deg,#a84a88,#6f2a58 55%,#48193a);border-color:#3a1430}
+  .odm .trap .tbar{background:linear-gradient(#f0d3e6,#d29ec2);border-color:#6f2a58}
+  .odm .trap .cname{color:#3a1030}
+  .odm .trap .artimg{background:radial-gradient(120% 100% at 50% 18%,#3a1830,#160812)}
+  .odm .trap .ribbon{background:linear-gradient(#2e1226,#180a14);color:#f2d8e8}
+  .odm .trap .text{background:linear-gradient(#f3e6ee,#e6d0e0);border-color:#6f2a58}
+  .odm .trap .text p{color:#3a1230}
+  .odm .trap .statbar{background:linear-gradient(#241020,#140812)}
+  .odm .trap .cal .num{color:#ffd0ec}
+  .odm .trap .seal{color:#ff7ac8;border-color:#e04aa8;text-shadow:0 0 8px rgba(230,90,180,.5)}
+  .odm .trap .rage{color:#ffcdea}
+  .odm .trap .rage .seg i.on{background:linear-gradient(#ff7ac8,#c81e8a);box-shadow:0 0 4px rgba(255,60,180,.6)}
+  .odm .trap .feel{background:linear-gradient(#f0d3e6,#dcb0d0);border-color:#6f2a58;color:#3a1030}
+  .odm .trap .feel b{color:#a01e78}
+  .odm .trap .fbar{color:#f2c8e4}
+
+  /* ── 神（金・UR） ── */
+  .odm .god{background:linear-gradient(150deg,#eccf76,#b8862a 55%,#8a6216);border-color:#4a3208}
+  .odm .god .tbar{background:linear-gradient(#fff2c4,#e8c877);border-color:#7a5a1c}
+  .odm .god .artimg{background:radial-gradient(120% 100% at 50% 18%,#2b2b56,#0e0e22)}
+  .odm .god .ribbon{background:linear-gradient(#3a2f10,#241a06);color:#f5e8c0}
+  .odm .god .text{background:linear-gradient(#f6efd8,#e9debd);border-color:#8a6a28}
+  .odm .god .statbar{background:linear-gradient(#221805,#140e02)}
+  .odm .god .cal .num{color:#ffe9b0}
+  .odm .god .setsym{background:linear-gradient(#e8c25a,#b8862a);color:#3a2600}
+  .odm .god .seal{color:#ffd85a;border-color:#e8c25a;text-shadow:0 0 12px rgba(232,194,90,.7);box-shadow:0 0 0 1px rgba(232,194,90,.3),0 2px 6px rgba(0,0,0,.4)}
+  .odm .god .rage{color:#ffe4a6}
+  .odm .god .rage .seg i.on{background:linear-gradient(#ffdf7a,#c8951e);box-shadow:0 0 5px rgba(255,200,60,.6)}
+  .odm .god .feel{background:linear-gradient(#f4e6b4,#e3c877);border-color:#7a5a1c;color:#3a2a08}
+  .odm .god .feel b{color:#8a5a10}
+  .odm .god .pips i{color:#ffdf7a}
+  .odm .god .fbar{color:#f4e2b6}
+
+  .odm .foot{margin-top:44px;border-top:1px solid var(--line);padding-top:22px;font-size:13px;color:var(--sub);line-height:1.75}
+  .odm .foot b{color:var(--ink)}
+</style>
+
+<div class="odm">
+<div class="wrap">
+  <div class="eyebrow">怒られカード · 図鑑（6種フル）</div>
+  <h1>食事は全部、<b>一枚の作品</b>になる。</h1>
+  <p class="lede">確定した"型"で6種を量産。<b>判定＝朱印／属性＝時間帯／カテゴリ＝食事ジャンル／主指標＝カロリー＋徒歩・ラン／実感＝角砂糖・ごはん換算／デブ度メーター／レア度＋ホロ</b>。有罪(赤)・褒め(緑・えらい度)・神(金UR)・罠(マゼンタ)。</p>
+
+  <div class="grid">
+
+    <!-- 1. 締めのラーメン -->
+    <div class="slot">
+      <article class="tcg guilty r">
+        <div class="foil"></div><div class="grain"></div>
+        <header class="tbar"><h3 class="cname">締めのラーメン</h3><span class="medallion shinya">深</span></header>
+        <div class="pips"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div>
+        <figure class="art"><div class="artimg"><span>🍜</span></div><span class="setsym">怒</span><span class="seal">有罪</span></figure>
+        <div class="ribbon"><span>麺類 ・ こってり系 ・ 深夜</span><span class="rage">デブ度<span class="seg"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span></div>
+        <div class="text"><p>深夜24時の召喚は"現行犯"。鬼コーチが必ず起きる。「24時にラーメン…お前の胃袋、夜勤手当出てんの？」</p></div>
+        <div class="statbar"><div class="cal"><span class="clab">カロリー</span><span class="num">520</span><span class="u">kcal</span></div><div class="pace"><span><span class="lab">徒歩</span> <b>47</b>分</span><span><span class="lab">ラン</span> <b>21</b>分</span></div></div>
+        <div class="feel"><span>🍬 角砂糖 <b>17</b>個分</span><span>🍚 ごはん <b>2.2</b>杯分</span></div>
+        <footer class="fbar"><span>NO.041 · 深夜シリーズ</span><span>体重換算(目安) +0.07kg</span><span class="rare r">R</span></footer>
+      </article>
+      <div class="cap"><b>有罪 ・ 深夜</b>／基本の怒られ枠。デブ度MAX。</div>
+    </div>
+
+    <!-- 2. サラダチキン -->
+    <div class="slot">
+      <article class="tcg praise r">
+        <div class="foil"></div><div class="grain"></div>
+        <header class="tbar"><h3 class="cname">サラダチキン</h3><span class="medallion hiru">昼</span></header>
+        <div class="pips"><i>★</i><i>★</i><i>★</i><i>★</i></div>
+        <figure class="art"><div class="artimg"><span>🥗</span></div><span class="setsym">怒</span><span class="seal">無罪</span></figure>
+        <div class="ribbon"><span>タンパク源 ・ 良品 ・ 昼</span><span class="rage">えらい度<span class="seg"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></span></div>
+        <div class="text"><p>賢い選択、成功。鬼コーチが照れながら認める。「お、ちゃんと選んだやん…どこで覚えた？」</p></div>
+        <div class="statbar"><div class="cal"><span class="clab">カロリー</span><span class="num">210</span><span class="u">kcal</span></div><div class="pace"><span><span class="lab">たんぱく</span> <b>22</b>g</span><span><span class="lab">貯金</span> <b>+300</b></span></div></div>
+        <div class="feel"><span>💪 たんぱく <b>22</b>g</span><span>🍚 ごはん <b>0.9</b>杯分</span></div>
+        <footer class="fbar"><span>NO.108 · 良品シリーズ</span><span>痩せ貯金 +300kcal</span><span class="rare r">R</span></footer>
+      </article>
+      <div class="cap"><b>無罪（褒め）・ 昼</b>／緑=えらい度。怒られ⇄褒めのギャップ。</div>
+    </div>
+
+    <!-- 3. 深夜のカキピー -->
+    <div class="slot">
+      <article class="tcg guilty r">
+        <div class="foil"></div><div class="grain"></div>
+        <header class="tbar"><h3 class="cname">深夜のカキピー</h3><span class="medallion shinya">深</span></header>
+        <div class="pips"><i>★</i><i>★</i><i>★</i></div>
+        <figure class="art"><div class="artimg"><span>🥜</span></div><span class="setsym">怒</span><span class="seal">有罪</span></figure>
+        <div class="ribbon"><span>間食 ・ 背徳系 ・ 深夜</span><span class="rage">デブ度<span class="seg"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></span></div>
+        <div class="text"><p>キッチンで立ったまま召喚＝罪が重い。鬼コーチ「ジップ袋ごと持つな！せめて皿に出せ！」</p></div>
+        <div class="statbar"><div class="cal"><span class="clab">カロリー</span><span class="num">305</span><span class="u">kcal</span></div><div class="pace"><span><span class="lab">徒歩</span> <b>28</b>分</span><span><span class="lab">ラン</span> <b>13</b>分</span></div></div>
+        <div class="feel"><span>🧈 脂質 高め</span><span>🍚 ごはん <b>1.3</b>杯分</span></div>
+        <footer class="fbar"><span>NO.042 · 深夜シリーズ</span><span>体重換算(目安) +0.04kg</span><span class="rare r">R</span></footer>
+      </article>
+      <div class="cap"><b>有罪 ・ 深夜</b>／同じ有罪でもキラ枠。食材ごとに無限展開。</div>
+    </div>
+
+    <!-- 4. 朝のプロテイン -->
+    <div class="slot">
+      <article class="tcg praise n">
+        <div class="foil"></div><div class="grain"></div>
+        <header class="tbar"><h3 class="cname">朝のプロテイン</h3><span class="medallion asa">朝</span></header>
+        <div class="pips"><i>★</i><i>★</i><i>★</i></div>
+        <figure class="art"><div class="artimg"><span>🥤</span></div><span class="setsym">怒</span><span class="seal">無罪</span></figure>
+        <div class="ribbon"><span>タンパク源 ・ 良品 ・ 朝</span><span class="rage">えらい度<span class="seg"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></span></div>
+        <div class="text"><p>起きて30分以内の召喚はえらい。鬼コーチ「ええやん、続けろよ。三日で辞めんなよ？」</p></div>
+        <div class="statbar"><div class="cal"><span class="clab">カロリー</span><span class="num">180</span><span class="u">kcal</span></div><div class="pace"><span><span class="lab">たんぱく</span> <b>20</b>g</span><span><span class="lab">貯金</span> <b>+120</b></span></div></div>
+        <div class="feel"><span>💪 たんぱく <b>20</b>g</span><span>☀️ 朝イチ習慣</span></div>
+        <footer class="fbar"><span>NO.201 · 良品シリーズ</span><span>痩せ貯金 +120kcal</span><span class="rare n">N</span></footer>
+      </article>
+      <div class="cap"><b>無罪（褒め）・ 朝</b>／地味な良習慣もカード化して継続を後押し。</div>
+    </div>
+
+    <!-- 5. ドカ食い衝動（罠） -->
+    <div class="slot">
+      <article class="tcg trap n">
+        <div class="foil"></div><div class="grain"></div>
+        <header class="tbar"><h3 class="cname">ドカ食い衝動</h3><span class="medallion wana">罠</span></header>
+        <div class="pips"></div>
+        <figure class="art"><div class="artimg"><span>🌀</span></div><span class="setsym">怒</span><span class="seal">罠</span></figure>
+        <div class="ribbon"><span>誘惑 ・ 通常罠</span><span class="rage">危険度<span class="seg"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span></div>
+        <div class="text"><p>食べる直前に発動。放置すると"痩せ貯金"が吹き飛ぶ。鬼コーチが割り込める。「深呼吸せえ。水飲め。10分待て。」</p></div>
+        <div class="statbar"><div class="cal"><span class="clab">リスク</span><span class="num">−400</span><span class="u">kcal相当</span></div><div class="pace"><span><span class="lab">我慢で</span> 回避</span></div></div>
+        <div class="feel"><span>🌀 我慢<b>10</b>分で無効化</span><span>💧 まず水を飲め</span></div>
+        <footer class="fbar"><span>NO.666 · 誘惑シリーズ</span><span>回避でストリーク継続</span><span class="rare n">N</span></footer>
+      </article>
+      <div class="cap"><b>誘惑 ・ 罠</b>／食べる前の"衝動"も演出化。踏みとどまる体験もゲームに。</div>
+    </div>
+
+    <!-- 6. 完璧な一日（神UR） -->
+    <div class="slot">
+      <article class="tcg god ur">
+        <div class="foil"></div><div class="grain"></div>
+        <header class="tbar"><h3 class="cname">完璧な一日</h3><span class="medallion kami">王</span></header>
+        <div class="pips"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div>
+        <figure class="art"><div class="artimg"><span>🏆</span></div><span class="setsym">怒</span><span class="seal">神</span></figure>
+        <div class="ribbon"><span>一日 ・ 達成の証</span><span class="rage">完璧度<span class="seg"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span></div>
+        <div class="text"><p>その日「摂取＜消費」を達成した時だけ手に入る。鬼コーチ、人生で数回の賛辞。「…完璧や。今日のお前は、神やった。」</p></div>
+        <div class="statbar"><div class="cal"><span class="clab">今日の収支</span><span class="num">−480</span><span class="u">kcal</span></div><div class="pace"><span>痩せ予測 <b>−0.1kg</b> 前進</span></div></div>
+        <div class="feel"><span>🍚 ごはん <b>2</b>杯分を消費で勝ち越し</span></div>
+        <footer class="fbar"><span>NO.000 · 神シリーズ</span><span>連続 5日達成</span><span class="rare ur">UR</span></footer>
+      </article>
+      <div class="cap"><b>大勝利 ・ 神カード（UR）</b>／収支達成日だけの金ホロ。集めたくなる頂点。</div>
+    </div>
+
+  </div>
+
+  <div class="foot">
+    これは1枚絵じゃなく<b>システム</b>：<b>判定</b>（有罪/無罪/罠/神）×<b>時間帯</b>（朝/昼/夜/深）×<b>食事ジャンル</b>×<b>デブ/えらい度</b>×<b>レア度</b>（深夜・連続でUP）。撮るたび1枚生成され<b>図鑑に貯まる＝集める＝継続</b>、UR/プレミアで<b>課金</b>まで繋がる。<br>※ 遊戯王等は雰囲気オマージュ（ロゴ/枠素材/種族名は不使用・独自語）。公開版は商標に触れない独自意匠に調整。
+  </div>
+</div>
+</div>

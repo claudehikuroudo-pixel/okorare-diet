@@ -1,0 +1,156 @@
+<style>
+  .odm{
+    --paper:#F5F4F1; --ink:#1A1613; --ink2:#726A61; --line:#EAE7E2;
+    --accent:#E4022B; --p5red:#E4022B; --p5ink:#0B0B0C;
+    --fdisp:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+    color:var(--ink);font-family:var(--fdisp);line-height:1.5;-webkit-font-smoothing:antialiased;
+    background:radial-gradient(90% 60% at 12% -8%,#fbe3e3 0,rgba(251,227,227,0) 42%),var(--paper);
+    padding:40px 20px 72px;min-height:100vh;
+  }
+  .odm *{box-sizing:border-box}
+  .odm .wrap{max-width:840px;margin:0 auto}
+  .odm .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin-bottom:12px}
+  .odm .eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);border-radius:2px}
+  .odm h1{font-size:clamp(26px,4vw,38px);font-weight:900;letter-spacing:-.02em;margin:0 0 12px}
+  .odm h1 b{color:var(--accent)}
+  .odm .lede{font-size:15px;color:var(--ink2);max-width:60ch;margin:0}
+  .odm .lede b{color:var(--ink);font-weight:700}
+
+  .odm .grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:38px}
+  @media(max-width:640px){.odm .grid{grid-template-columns:1fr;max-width:360px;margin-inline:auto}}
+  .odm .item{display:flex;flex-direction:column;gap:14px}
+  .odm .cap .n{font-size:11px;font-weight:900;letter-spacing:.08em;color:var(--accent)}
+  .odm .cap .t{font-size:16px;font-weight:800;margin-top:2px}
+  .odm .cap .d{font-size:12.5px;color:var(--ink2);line-height:1.6;margin-top:4px}
+  .odm .cap .d b{color:var(--ink)}
+
+  .odm .card{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;font-family:var(--fdisp);box-shadow:0 22px 44px -18px rgba(20,12,8,.45)}
+
+  /* ── ① ペルソナ5（密度版・余白解消） ── */
+  .odm .p5{background:var(--p5ink);color:#f7f5f2;display:flex;flex-direction:column}
+  .odm .p5 .red{position:absolute;top:-6%;left:-6%;right:-6%;height:100%;background:var(--p5red);clip-path:polygon(0 0,100% 0,100% 62%,0 82%);z-index:0}
+  .odm .p5 .dots{position:absolute;inset:0;z-index:0;opacity:.14;background-image:radial-gradient(#000 1.1px,transparent 1.5px);background-size:8px 8px}
+  .odm .p5 .star{position:absolute;top:12px;right:14px;width:32px;height:32px;z-index:3;color:#fff;transform:rotate(12deg)}
+  .odm .p5 .pad{position:relative;z-index:2;padding:16px 17px 0;display:flex;flex-direction:column;height:100%}
+  .odm .p5 .kick{font-size:10px;font-weight:900;letter-spacing:.2em;color:var(--p5ink)}
+  .odm .p5 .verdict{display:flex;align-items:baseline;gap:9px;transform:skewX(-6deg);margin-top:2px}
+  .odm .p5 .verdict em{font-style:italic;font-weight:900;font-size:60px;line-height:.85;letter-spacing:2px;color:#f7f5f2;-webkit-text-stroke:2.6px var(--p5ink);paint-order:stroke fill}
+  .odm .p5 .verdict b{font-style:italic;font-weight:900;font-size:14px;letter-spacing:.14em;color:var(--p5ink)}
+  .odm .p5 .mid{display:flex;gap:13px;padding-top:12px;align-items:flex-start}
+  .odm .p5 .photo{width:98px;height:98px;flex:none;border-radius:3px;border:3px solid #f7f5f2;overflow:hidden;transform:skewY(-4deg) rotate(-2deg);box-shadow:5px 6px 0 var(--p5ink);background:radial-gradient(120% 90% at 50% 25%,#3a2a20,#160f0a);display:flex;align-items:center;justify-content:center}
+  .odm .p5 .photo span{font-size:50px;transform:skewY(4deg)}
+  .odm .p5 .info{min-width:0;padding-top:4px;flex:1}
+  .odm .p5 .food{font-size:17px;font-weight:900;font-style:italic;transform:skewX(-4deg)}
+  .odm .p5 .cal{font-size:30px;font-weight:900;font-style:italic;line-height:1;margin-top:6px;color:#fff;font-variant-numeric:tabular-nums}
+  .odm .p5 .cal i{font-size:13px;margin-left:3px;opacity:.9}
+  .odm .p5 .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+  .odm .p5 .tag{background:var(--p5ink);color:#fff;font-size:10.5px;font-weight:800;padding:4px 9px;transform:skewX(-10deg)}
+  .odm .p5 .tag em{font-style:italic;font-weight:900}
+  .odm .p5 .comment{flex:1;margin-top:14px;display:flex;gap:11px;align-items:center;
+    background:rgba(11,11,12,.92);border-left:4px solid var(--p5red);border-radius:9px;
+    padding:13px 14px;color:#f2efe9;font-size:13px;font-weight:700;line-height:1.6}
+  .odm .p5 .comment .oh{width:44px;height:44px;flex:none}
+  .odm .p5 .comment .who{display:block;color:#ff5b52;font-size:10.5px;font-weight:900;letter-spacing:.05em;margin-bottom:2px}
+  .odm .p5 .foot{display:flex;justify-content:space-between;align-items:center;padding:9px 3px 11px;
+    font-size:9.5px;font-weight:800;letter-spacing:.08em;color:var(--p5ink)}
+
+  /* ── ② 遊戯王 ── */
+  .odm .yg{background:linear-gradient(165deg,#dca961,#b06f2c);padding:9px;display:flex;flex-direction:column;color:#1a1206}
+  .odm .yg .frame{flex:1;display:flex;flex-direction:column;border:2px solid #6b4415;border-radius:5px;background:#c88b3a;padding:7px;gap:6px;min-height:0}
+  .odm .yg .name{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(#ecd097,#cfa662);border:1px solid #8a5f22;border-radius:3px;padding:5px 9px}
+  .odm .yg .name h5{font-size:16px;font-weight:900;margin:0;letter-spacing:-.03em}
+  .odm .yg .attr{width:22px;height:22px;flex:none;border-radius:50%;background:radial-gradient(#6a2e8f,#2a0f3f);color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;border:1px solid #e0c680}
+  .odm .yg .lv{display:flex;justify-content:flex-end;gap:1px;font-size:13px;color:#f0a81e;text-shadow:0 1px 0 #5c3200;letter-spacing:1px}
+  .odm .yg .art{aspect-ratio:1/1;border:2px solid #3a2607;background:radial-gradient(120% 90% at 50% 25%,#3a2a20,#160f0a);display:flex;align-items:center;justify-content:center}
+  .odm .yg .art span{font-size:74px}
+  .odm .yg .type{font-size:11px;font-weight:900;color:#241606;letter-spacing:-.02em}
+  .odm .yg .eff{flex:1;background:#efe2c6;border:1px solid #8a5f22;border-radius:2px;padding:8px 9px;font-size:10.5px;line-height:1.5;color:#2a1a06;font-weight:600;min-height:0;overflow:hidden}
+  .odm .yg .atk{display:flex;justify-content:flex-end;gap:14px;font-size:13px;font-weight:900;color:#241606;font-variant-numeric:tabular-nums}
+
+  .odm .flow{margin-top:38px;border-top:1px solid var(--line);padding-top:22px}
+  .odm .flow h3{font-size:15px;font-weight:900;margin:0 0 10px}
+  .odm .flow p{font-size:13px;color:var(--ink2);line-height:1.75;margin:0}
+  .odm .flow p b{color:var(--ink)}
+  .odm .flow .step{display:inline-block;background:var(--accent);color:#fff;font-size:11px;font-weight:900;border-radius:6px;padding:2px 8px;margin-right:4px}
+</style>
+
+<div class="odm">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="oni" viewBox="0 0 60 60">
+    <path d="M17 15 Q13 3 21 6 Q23 11 25 16 Z" fill="#F3E4C6" stroke="#c9a763" stroke-width="1"/>
+    <path d="M43 15 Q47 3 39 6 Q37 11 35 16 Z" fill="#F3E4C6" stroke="#c9a763" stroke-width="1"/>
+    <path d="M30 9 C45 9 51 21 51 33 C51 47 42 55 30 55 C18 55 9 47 9 33 C9 21 15 9 30 9 Z" fill="#DA4034"/>
+    <rect x="8" y="21" width="44" height="8" rx="1" fill="#fff"/>
+    <circle cx="30" cy="25" r="4" fill="#DA4034"/>
+    <path d="M17 35 L27 38" stroke="#3a0f0a" stroke-width="3.6" stroke-linecap="round"/>
+    <path d="M43 35 L33 38" stroke="#3a0f0a" stroke-width="3.6" stroke-linecap="round"/>
+    <circle cx="23" cy="41" r="3.2" fill="#fff"/><circle cx="23.6" cy="41.4" r="1.7" fill="#160000"/>
+    <circle cx="37" cy="41" r="3.2" fill="#fff"/><circle cx="36.4" cy="41.4" r="1.7" fill="#160000"/>
+    <path d="M23 49 Q30 45 37 49" stroke="#3a0f0a" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+    <path d="M27 47.5 L28.5 51.5 L30 47.5 Z" fill="#fff"/>
+  </symbol>
+  <symbol id="star" viewBox="0 0 24 24"><path d="M12 1l2.9 7.3L22 9l-5.5 4.6L18.4 21 12 16.9 5.6 21l1.9-7.4L2 9l7.1-.7z" fill="currentColor"/></symbol>
+</svg>
+
+<div class="wrap">
+  <div class="eyebrow">怒られカード · 本命2案（①密度改善版）</div>
+  <h1>①<b>P5</b>＋②<b>遊戯王</b>で決まり。</h1>
+  <p class="lede">①はコメントを主役化して<b>余白を解消</b>（下がスカスカだったのを埋めました）。②はそのまま。この2枚は競合しない —— <b>①＝毎回のシェア演出</b>、<b>②＝集める図鑑・課金フック</b>として両立します。</p>
+
+  <div class="grid">
+
+    <!-- ① P5 密度版 -->
+    <div class="item">
+      <div class="card p5">
+        <div class="red"></div><div class="dots"></div>
+        <svg class="star"><use href="#star"/></svg>
+        <div class="pad">
+          <div class="kick">RESULT ── 深夜 24:41 の判定</div>
+          <div class="verdict"><em>有罪</em><b>GUILTY</b></div>
+          <div class="mid">
+            <div class="photo"><span>🍜</span></div>
+            <div class="info">
+              <div class="food">締めのラーメン</div>
+              <div class="cal">520<i>kcal</i></div>
+              <div class="tags"><span class="tag">P22</span><span class="tag">F18</span><span class="tag">C68</span><span class="tag">歩き<em>47分</em></span></div>
+            </div>
+          </div>
+          <div class="comment">
+            <svg class="oh"><use href="#oni"/></svg>
+            <div><span class="who">鬼コーチ</span>は？今 何時やと思てんの。締めのラーメンで、今日の努力ぜんぶチャラや。</div>
+          </div>
+          <div class="foot"><span>#怒られダイエット</span><span>@hikurouto_ai</span></div>
+        </div>
+      </div>
+      <div class="cap"><div class="n">① ペルソナ5風（密度改善）</div><div class="t">毎回のシェア演出</div><div class="d">コメントを大きく主役化して<b>余白ゼロ</b>に。撮った瞬間この"作品"が出る＝そのまま拡散。褒め時は「無罪／MERCY」の紺×金へ。</div></div>
+    </div>
+
+    <!-- ② 遊戯王 -->
+    <div class="item">
+      <div class="card yg">
+        <div class="frame">
+          <div class="name"><h5>締めのラーメン</h5><div class="attr">闇</div></div>
+          <div class="lv">★★★★★★</div>
+          <div class="art"><span>🍜</span></div>
+          <div class="type">【深夜族／悪魔族】</div>
+          <div class="eff">深夜24時にこのカードを召喚に成功した場合、「鬼コーチ」の効果が必ず発動する。「今 何時やと思てんの。」自分は"歩き47分"ぶんのダメージを受ける。深夜補正でATKは30%上昇。</div>
+          <div class="atk"><span>ATK/520</span><span>DEF/68</span></div>
+        </div>
+      </div>
+      <div class="cap"><div class="n">② 遊戯王風</div><div class="t">集める図鑑・課金フック</div><div class="d">食事＝モンスターカード化（kcal＝ATK／糖質＝DEF／★＝ギルティ度）。<b>集める・レア度・図鑑</b>で継続、<b>ガチャ/プレミアで課金</b>まで狙える。</div></div>
+    </div>
+
+  </div>
+
+  <div class="flow">
+    <h3>2枚の合わせ技（プロダクトの流れ）</h3>
+    <p>
+      <span class="step">STEP 1</span> 写真を撮る → その場で <b>①P5カード</b>が出る＝ワンタップでSNSへ（毎回の拡散エンジン）。<br>
+      <span class="step">STEP 2</span> 同じ判定が <b>②遊戯王カード</b>として<b>図鑑に保存</b>される。食べた物がコレクション化。<br>
+      <span class="step">STEP 3</span> レア食材・深夜レア・連続記録で<b>レア度UP</b>／ガチャ・プレミア枠で<b>課金</b>。あすけんの"未来さんグッズ"に相当する熱狂の核に。
+    </p>
+  </div>
+
+  <p style="margin-top:26px;font-size:12px;color:var(--ink2);opacity:.85;line-height:1.7">※ P5・遊戯王等は雰囲気オマージュ（実ロゴ/フォント/素材は不使用）。公開版では商標に触れない独自トーンに調整します。</p>
+</div>
+</div>

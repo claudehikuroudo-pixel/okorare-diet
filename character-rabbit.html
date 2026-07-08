@@ -1,0 +1,214 @@
+<meta charset="utf-8">
+<style>
+  .odm{--bg:#17141a;--ink:#F6F5F2;--sub:#b9afa4;--line:rgba(255,255,255,.09);--accent:#E4022B;--pink:#FBC3D0;--cream:#FBF7F0;
+    --mincho:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+    --g:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",system-ui,sans-serif;
+    color:var(--ink);font-family:var(--g);line-height:1.5;-webkit-font-smoothing:antialiased;
+    background:radial-gradient(75% 55% at 50% -8%,#3a2534 0,#17141a 55%);padding:40px 20px 64px;min-height:100vh}
+  .odm *{box-sizing:border-box}
+  .odm .wrap{max-width:1000px;margin:0 auto}
+  .odm .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:800;letter-spacing:.22em;color:#f2a6c0;text-transform:uppercase;margin-bottom:12px}
+  .odm .eyebrow::before{content:"";width:24px;height:1.5px;background:linear-gradient(90deg,#f2a6c0,transparent)}
+  .odm h1{font-family:var(--mincho);font-size:clamp(25px,4.2vw,36px);font-weight:900;margin:0 0 10px}
+  .odm h1 b{color:#ff8ab0}
+  .odm .lede{font-size:14.5px;color:var(--sub);max-width:66ch;margin:0}
+  .odm .lede b{color:var(--ink)}
+
+  .odm .hero{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:26px;background:linear-gradient(120deg,#241820,#31212c);border:1px solid var(--line);border-radius:22px;padding:22px}
+  .odm .hero .big{width:190px;height:190px;flex:none;border-radius:20px;background:radial-gradient(circle at 50% 38%,#3a2a34,#241820);display:grid;place-items:center}
+  .odm .hero .big svg{width:168px;height:168px}
+  .odm .hero .info{flex:1;min-width:240px}
+  .odm .hero .info .name{font-family:var(--mincho);font-size:26px;font-weight:900}
+  .odm .hero .info .name span{font-size:13px;color:var(--sub);font-weight:700;margin-left:8px}
+  .odm .hero .info p{font-size:13.5px;color:#e7dfe4;line-height:1.7;margin:8px 0 0}
+  .odm .hero .info p b{color:#ff9ec4}
+  .odm .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .odm .chip{font-size:11px;font-weight:800;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:999px;padding:4px 11px}
+  .odm .chip.a{color:#ff9ec4;border-color:rgba(255,140,180,.4)}
+
+  .odm .sec{font-family:var(--mincho);font-weight:900;font-size:16px;margin:34px 0 4px}
+  .odm .sub{font-size:12px;color:var(--sub);margin-bottom:16px}
+  .odm .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:12px}
+  .odm .tile{background:#211a20;border:1px solid var(--line);border-radius:14px;padding:10px 8px 9px;text-align:center}
+  .odm .tile .d{width:100%;height:78px;border-radius:10px;background:radial-gradient(circle at 50% 38%,#2e2430,#201820);display:grid;place-items:center;margin-bottom:7px}
+  .odm .tile .d svg{width:72px;height:72px}
+  .odm .tile .nm{font-size:12px;font-weight:900}
+  .odm .tile .ln{font-size:9.5px;color:var(--sub);margin-top:2px;line-height:1.4}
+  .odm .tile.daily .nm{color:#8fd0ff}
+  .odm .tile.rare{border-color:rgba(255,180,80,.45)}
+  .odm .tile.rare .nm{color:#ffca6a}
+
+  .odm .foot{margin-top:30px;border-top:1px solid var(--line);padding-top:18px;font-size:12.5px;color:var(--sub);line-height:1.7}
+  .odm .foot b{color:var(--ink)}
+</style>
+
+<div class="odm"><div class="wrap">
+  <div class="eyebrow">怒られダイエット · 新キャラ案（脱・鬼）</div>
+  <h1>もちもち可愛い、<b>でも口は関西弁の毒舌</b>。</h1>
+  <p class="lede">鬼はやめて、<b>ゆるうさぎ×関西弁×毒舌×表情無限</b>へ（うさまる/LINEスタンプの勝ち筋）。見た目のかわいさと毒舌のギャップで笑わせる。<b>日常で使える表情</b>も入れて、そのままLINEスタンプ＝集客チャネルにできる設計。</p>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="big"><svg viewBox="0 0 80 80">
+      <!-- ears -->
+      <ellipse cx="31" cy="17" rx="6" ry="15" fill="#FBF7F0" stroke="#e9dcc9" stroke-width="1"/><ellipse cx="31" cy="18" rx="2.6" ry="9.5" fill="#FBC3D0"/>
+      <ellipse cx="49" cy="17" rx="6" ry="15" fill="#FBF7F0" stroke="#e9dcc9" stroke-width="1"/><ellipse cx="49" cy="18" rx="2.6" ry="9.5" fill="#FBC3D0"/>
+      <!-- head -->
+      <ellipse cx="40" cy="47" rx="23" ry="20.5" fill="#FBF7F0" stroke="#e9dcc9" stroke-width="1"/>
+      <!-- cheeks -->
+      <circle cx="24" cy="51" r="4.4" fill="#FBC3D0" opacity=".65"/><circle cx="56" cy="51" r="4.4" fill="#FBC3D0" opacity=".65"/>
+      <!-- brows tiny (mild grump) -->
+      <path d="M28 40 l6 1.6" stroke="#8a6b58" stroke-width="1.8" stroke-linecap="round"/><path d="M52 40 l-6 1.6" stroke="#8a6b58" stroke-width="1.8" stroke-linecap="round"/>
+      <!-- eyes big -->
+      <ellipse cx="33" cy="47" rx="3.6" ry="4.8" fill="#241812"/><circle cx="34.2" cy="45.2" r="1.4" fill="#fff"/>
+      <ellipse cx="47" cy="47" rx="3.6" ry="4.8" fill="#241812"/><circle cx="48.2" cy="45.2" r="1.4" fill="#fff"/>
+      <!-- nose + mouth (smug) -->
+      <path d="M38.5 51 h3 l-1.5 2 Z" fill="#f2909f"/>
+      <path d="M40 53 q3 2.5 5 -0.5" fill="none" stroke="#8a6b58" stroke-width="1.8" stroke-linecap="round"/>
+      <!-- whistle (coach / brand red) -->
+      <path d="M40 66 q-8 4 -13 2" fill="none" stroke="#c9a36a" stroke-width="1.2"/>
+      <rect x="24" y="66" width="9" height="6" rx="3" fill="#E4022B"/><circle cx="33" cy="69" r="1.6" fill="#8a0016"/>
+    </svg></div>
+    <div class="info">
+      <div class="name">もちうさ<span>（仮／候補：ウサ師匠・ぼんち・うさ吉）</span></div>
+      <p><b>設定</b>：もちもち丸い見た目のうさぎ。中身は<b>関西弁のドS毒舌トレーナー</b>。「は？今何時や思てんの」と詰めてくるが憎めない。<br>
+      <b>裏設定（ギャップの二段目）</b>：実は本人も<b>大の食いしん坊</b>。お前の深夜ラーメンに説教しながら、よだれを垂らす。＝敵じゃなく"同じ穴の相棒"感で愛される。</p>
+      <div class="chips">
+        <span class="chip a">脱・鬼</span><span class="chip">ゆるうさぎ</span><span class="chip">関西弁・毒舌</span><span class="chip">表情無限</span><span class="chip">耳で感情表現</span><span class="chip">LINEスタンプ化可</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 判定系 -->
+  <div class="sec">① 判定・ダイエット表情</div>
+  <div class="sub">アプリの判定で出る顔。かわいい×毒舌のギャップで刺す。</div>
+  <div class="grid">
+
+    <div class="tile"><div class="d"><svg viewBox="0 0 80 80">
+      <ellipse cx="31" cy="18" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/><ellipse cx="31" cy="19" rx="2.4" ry="9" fill="#FBC3D0"/><ellipse cx="49" cy="18" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/><ellipse cx="49" cy="19" rx="2.4" ry="9" fill="#FBC3D0"/>
+      <ellipse cx="40" cy="47" rx="22" ry="19.5" fill="#FBF7F0" stroke="#e9dcc9"/><circle cx="24" cy="51" r="4" fill="#FBC3D0" opacity=".6"/><circle cx="56" cy="51" r="4" fill="#FBC3D0" opacity=".6"/>
+      <path d="M28 41 l6 1.4" stroke="#8a6b58" stroke-width="1.8" stroke-linecap="round"/><path d="M52 41 l-6 1.4" stroke="#8a6b58" stroke-width="1.8" stroke-linecap="round"/>
+      <ellipse cx="33" cy="47" rx="3.4" ry="4.4" fill="#241812"/><circle cx="34" cy="45.4" r="1.2" fill="#fff"/><ellipse cx="47" cy="47" rx="3.4" ry="4.4" fill="#241812"/><circle cx="48" cy="45.4" r="1.2" fill="#fff"/>
+      <path d="M39 51 h3 l-1.5 2 Z" fill="#f2909f"/><path d="M39 54 q3 2.5 5 -0.5" fill="none" stroke="#8a6b58" stroke-width="1.8" stroke-linecap="round"/>
+    </svg></div><div class="nm">ドヤ</div><div class="ln">通常・自信</div></div>
+
+    <div class="tile"><div class="d"><svg viewBox="0 0 80 80">
+      <ellipse cx="30" cy="18" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9" transform="rotate(-8 30 30)"/><ellipse cx="50" cy="18" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9" transform="rotate(8 50 30)"/>
+      <ellipse cx="40" cy="47" rx="22" ry="19.5" fill="#FBF7F0" stroke="#e9dcc9"/>
+      <path d="M28 43 h7" stroke="#241812" stroke-width="2.6" stroke-linecap="round"/><path d="M45 43 h7" stroke="#241812" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M27 40 l6 2" stroke="#8a6b58" stroke-width="1.6" stroke-linecap="round"/><path d="M53 40 l-6 2" stroke="#8a6b58" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M39 52 h3 l-1.5 2 Z" fill="#f2909f"/><path d="M36 55 h8" stroke="#8a6b58" stroke-width="1.8" stroke-linecap="round"/>
+      <text x="54" y="40" fill="#8fb0c0" font-size="7" font-family="sans-serif">…</text>
+    </svg></div><div class="nm">ジト目</div><div class="ln">有罪・呆れ</div></div>
+
+    <div class="tile"><div class="d"><svg viewBox="0 0 80 80">
+      <ellipse cx="31" cy="16" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/><ellipse cx="49" cy="16" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/>
+      <ellipse cx="40" cy="47" rx="22" ry="19.5" fill="#FBD1C0" stroke="#e9b9a9"/>
+      <path d="M27 41 l7 3" stroke="#5a1810" stroke-width="2.8" stroke-linecap="round"/><path d="M53 41 l-7 3" stroke="#5a1810" stroke-width="2.8" stroke-linecap="round"/>
+      <path d="M30 48 q3 -3 6 0" fill="none" stroke="#241812" stroke-width="2.4" stroke-linecap="round"/><path d="M44 48 q3 -3 6 0" fill="none" stroke="#241812" stroke-width="2.4" stroke-linecap="round"/>
+      <ellipse cx="40" cy="55" rx="4" ry="3" fill="#7a1810"/>
+      <path d="M25 33 h6 M28 30 v6" stroke="#E4022B" stroke-width="1.8" stroke-linecap="round"/>
+    </svg></div><div class="nm">ブチギレ</div><div class="ln">深夜・激ヤバ</div></div>
+
+    <div class="tile"><div class="d"><svg viewBox="0 0 80 80">
+      <ellipse cx="31" cy="18" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/><ellipse cx="49" cy="18" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/>
+      <ellipse cx="40" cy="47" rx="22" ry="19.5" fill="#FBF7F0" stroke="#e9dcc9"/>
+      <path d="M30 45 q3 -3 6 0" fill="none" stroke="#241812" stroke-width="2.4" stroke-linecap="round"/><path d="M44 45 q3 -3 6 0" fill="none" stroke="#241812" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M33 47 q-2 6 0 11 q2 -2 3 0" fill="#6cb8ff"/><path d="M47 47 q2 6 0 11 q-2 -2 -3 0" fill="#6cb8ff"/>
+      <path d="M36 53 q4 3 8 0" fill="none" stroke="#8a6b58" stroke-width="1.8" stroke-linecap="round"/>
+    </svg></div><div class="nm">号泣</div><div class="ln">褒め・感涙</div></div>
+
+    <div class="tile rare"><div class="d"><svg viewBox="0 0 80 80">
+      <ellipse cx="31" cy="15" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/><ellipse cx="49" cy="15" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/>
+      <ellipse cx="40" cy="47" rx="22" ry="19.5" fill="#EEF0F0" stroke="#c9cdcd"/>
+      <path d="M27 39 q4 -2 7 1" stroke="#8a6b58" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M53 39 q-4 -2 -7 1" stroke="#8a6b58" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <circle cx="33" cy="47" r="4.6" fill="#fff" stroke="#bbb"/><circle cx="47" cy="47" r="4.6" fill="#fff" stroke="#bbb"/>
+      <ellipse cx="40" cy="56" rx="2" ry="3" fill="#3a2a24"/>
+      <path d="M55 40 q4 3 3 8" fill="#bfe3ff"/>
+    </svg></div><div class="nm">絶句・白目</div><div class="ln">超過激カロリー(隠しレア)</div></div>
+
+    <div class="tile rare"><div class="d"><svg viewBox="0 0 80 80">
+      <ellipse cx="31" cy="20" rx="5.5" ry="13" fill="#FBF7F0" stroke="#e9dcc9" transform="rotate(14 31 33)"/><ellipse cx="49" cy="20" rx="5.5" ry="13" fill="#FBF7F0" stroke="#e9dcc9" transform="rotate(-14 49 33)"/>
+      <ellipse cx="40" cy="47" rx="22" ry="19.5" fill="#FBF7F0" stroke="#e9dcc9"/><circle cx="24" cy="51" r="4" fill="#FBC3D0" opacity=".6"/><circle cx="56" cy="51" r="4" fill="#FBC3D0" opacity=".6"/>
+      <path d="M29 46 q4 4 8 0" fill="none" stroke="#241812" stroke-width="2.2" stroke-linecap="round"/><path d="M43 46 q4 4 8 0" fill="none" stroke="#241812" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M35 52 q5 5 10 0 Z" fill="#f2909f"/><path d="M40 54 q1 4 4 5" fill="none" stroke="#6cb8ff" stroke-width="2" stroke-linecap="round"/>
+    </svg></div><div class="nm">よだれ</div><div class="ln">お前の飯うまそう…(相棒)</div></div>
+
+    <div class="tile"><div class="d"><svg viewBox="0 0 80 80">
+      <ellipse cx="30" cy="15" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/><ellipse cx="50" cy="15" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/>
+      <ellipse cx="40" cy="47" rx="22" ry="19.5" fill="#FBF7F0" stroke="#e9dcc9"/><circle cx="24" cy="51" r="4" fill="#FBC3D0" opacity=".7"/><circle cx="56" cy="51" r="4" fill="#FBC3D0" opacity=".7"/>
+      <path d="M29 48 l4 -4 l4 4" fill="none" stroke="#241812" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M43 48 l4 -4 l4 4" fill="none" stroke="#241812" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M35 53 q5 5 10 0" fill="none" stroke="#8a6b58" stroke-width="2" stroke-linecap="round"/>
+      <path d="M14 40 l-3 -2 M66 40 l3 -2" stroke="#ffd257" stroke-width="1.8" stroke-linecap="round"/>
+    </svg></div><div class="nm">満面の笑み</div><div class="ln">大褒め・神カード</div></div>
+
+  </div>
+
+  <!-- 日常系 -->
+  <div class="sec">② 日常で使える表情（＝そのままLINEスタンプ／集客チャネル）</div>
+  <div class="sub">研究の勝ち筋：了解・お疲れ・ありがとう等の"実用"が入るとスタンプとして売れる＆広がる。</div>
+  <div class="grid">
+
+    <div class="tile daily"><div class="d"><svg viewBox="0 0 80 80">
+      <ellipse cx="31" cy="16" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/><ellipse cx="49" cy="16" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/>
+      <ellipse cx="40" cy="47" rx="22" ry="19.5" fill="#FBF7F0" stroke="#e9dcc9"/><circle cx="24" cy="51" r="4" fill="#FBC3D0" opacity=".6"/><circle cx="56" cy="51" r="4" fill="#FBC3D0" opacity=".6"/>
+      <path d="M30 45 q3 -3 6 0" fill="none" stroke="#241812" stroke-width="2.4" stroke-linecap="round"/><path d="M44 45 q3 -3 6 0" fill="none" stroke="#241812" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M39 51 h3 l-1.5 2 Z" fill="#f2909f"/><path d="M37 55 q3 2 6 0" fill="none" stroke="#8a6b58" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M58 40 l-4 -5 l7 2 Z" fill="#ffd257"/><ellipse cx="62" cy="46" rx="4" ry="5" fill="#FBF7F0" stroke="#e9dcc9"/>
+    </svg></div><div class="nm">了解！</div><div class="ln">日常・グッ</div></div>
+
+    <div class="tile daily"><div class="d"><svg viewBox="0 0 80 80">
+      <ellipse cx="30" cy="30" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9" transform="rotate(38 30 30)"/><ellipse cx="50" cy="30" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9" transform="rotate(-38 50 30)"/>
+      <ellipse cx="40" cy="49" rx="22" ry="19" fill="#FBF7F0" stroke="#e9dcc9"/>
+      <path d="M30 48 q3 3 6 0" fill="none" stroke="#241812" stroke-width="2.2" stroke-linecap="round"/><path d="M44 48 q3 3 6 0" fill="none" stroke="#241812" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M37 55 h6" stroke="#8a6b58" stroke-width="1.8" stroke-linecap="round"/>
+      <text x="52" y="34" fill="#cfe6ff" font-size="8" font-family="sans-serif">～</text>
+    </svg></div><div class="nm">おつかれ〜</div><div class="ln">日常・脱力(耳たれ)</div></div>
+
+    <div class="tile daily"><div class="d"><svg viewBox="0 0 80 80">
+      <ellipse cx="31" cy="20" rx="5.5" ry="13" fill="#FBF7F0" stroke="#e9dcc9"/><ellipse cx="49" cy="20" rx="5.5" ry="13" fill="#FBF7F0" stroke="#e9dcc9"/>
+      <ellipse cx="40" cy="50" rx="22" ry="18" fill="#FBF7F0" stroke="#e9dcc9"/>
+      <path d="M31 50 q3 3 6 0" fill="none" stroke="#241812" stroke-width="2.2" stroke-linecap="round"/><path d="M43 50 q3 3 6 0" fill="none" stroke="#241812" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M38 55 h4" stroke="#8a6b58" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M18 62 q22 8 44 0" fill="none" stroke="#e9dcc9" stroke-width="1" opacity=".5"/>
+    </svg></div><div class="nm">ありがとう</div><div class="ln">日常・ぺこり</div></div>
+
+    <div class="tile daily"><div class="d"><svg viewBox="0 0 80 80">
+      <ellipse cx="31" cy="17" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/><ellipse cx="49" cy="17" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/>
+      <ellipse cx="40" cy="47" rx="22" ry="19.5" fill="#FBF7F0" stroke="#e9dcc9"/><circle cx="24" cy="51" r="4" fill="#FBC3D0" opacity=".6"/><circle cx="56" cy="51" r="4" fill="#FBC3D0" opacity=".6"/>
+      <path d="M30 46 q3 3 6 0" fill="none" stroke="#241812" stroke-width="2.2" stroke-linecap="round"/><path d="M44 46 q3 3 6 0" fill="none" stroke="#241812" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M37 52 q3 3 6 0.5" fill="none" stroke="#8a6b58" stroke-width="1.8" stroke-linecap="round"/>
+    </svg></div><div class="nm">ニヤニヤ</div><div class="ln">日常・イジり</div></div>
+
+    <div class="tile daily"><div class="d"><svg viewBox="0 0 80 80">
+      <ellipse cx="30" cy="28" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9" transform="rotate(30 30 30)"/><ellipse cx="50" cy="28" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9" transform="rotate(-30 50 30)"/>
+      <ellipse cx="40" cy="49" rx="22" ry="19" fill="#FBF7F0" stroke="#e9dcc9"/>
+      <ellipse cx="33" cy="48" rx="3" ry="4" fill="#241812"/><ellipse cx="47" cy="48" rx="3" ry="4" fill="#241812"/>
+      <path d="M33 52 q-2 3 0 4" fill="none" stroke="#6cb8ff" stroke-width="1.6"/>
+      <path d="M37 55 q3 -2 6 0" fill="none" stroke="#8a6b58" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M25 42 q4 1 4 5" stroke="#8fb0c0" stroke-width="1.4" fill="none"/>
+    </svg></div><div class="nm">しょんぼり</div><div class="ln">日常・凹み</div></div>
+
+    <div class="tile daily"><div class="d"><svg viewBox="0 0 80 80">
+      <ellipse cx="31" cy="18" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/><ellipse cx="49" cy="18" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/>
+      <ellipse cx="40" cy="47" rx="22" ry="19.5" fill="#FBF7F0" stroke="#e9dcc9"/>
+      <path d="M30 47 q3 2 6 0" fill="none" stroke="#241812" stroke-width="2" stroke-linecap="round"/><path d="M44 47 q3 2 6 0" fill="none" stroke="#241812" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="55" cy="52" rx="3.4" ry="2.4" fill="#bfe3ff" opacity=".7"/>
+      <text x="50" y="24" fill="#cfe6ff" font-size="9" font-weight="700" font-family="sans-serif">Z</text><text x="57" y="19" fill="#cfe6ff" font-size="6" font-family="sans-serif">z</text>
+    </svg></div><div class="nm">寝てる</div><div class="ln">日常・限界</div></div>
+
+    <div class="tile daily"><div class="d"><svg viewBox="0 0 80 80">
+      <ellipse cx="31" cy="17" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/><ellipse cx="49" cy="17" rx="5.5" ry="14" fill="#FBF7F0" stroke="#e9dcc9"/>
+      <ellipse cx="40" cy="47" rx="22" ry="19.5" fill="#FBF7F0" stroke="#e9dcc9"/><circle cx="24" cy="51" r="4" fill="#FBC3D0" opacity=".7"/><circle cx="56" cy="51" r="4" fill="#FBC3D0" opacity=".7"/>
+      <path d="M29 47 l4 -4 l4 4" fill="none" stroke="#241812" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="47" cy="47" rx="1.4" ry="3" fill="#241812"/>
+      <path d="M36 53 q4 2 7 -1" fill="none" stroke="#8a6b58" stroke-width="1.8" stroke-linecap="round"/><path d="M42 54 q3 2 5 4" fill="#f2909f"/>
+    </svg></div><div class="nm">てへぺろ</div><div class="ln">日常・ごまかし</div></div>
+
+  </div>
+
+  <div class="foot">
+    <b>耳が第3の表情</b>：ピン＝警戒/怒、たれ＝脱力/悲、ぴょこ＝ごきげん。うさぎは<b>耳で感情を足せる＝表情数が実質倍</b>（LINEスタンプ的に超有利）。<br>
+    ※ SVGラフ（当たり）。本番は絵師/AI画像で清書（もちもち質感・手描き感）。名前は仮＝もちうさ／ウサ師匠／ぼんち／うさ吉から。<br>
+    次：この方向でOKなら名前を決めて表情をさらに増やす→アプリ判定と連動＋LINEスタンプ化。鬼コーチ案は候補として保持。
+  </div>
+</div></div>
